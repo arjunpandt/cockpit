@@ -18,15 +18,20 @@ export class EksClusterredirectComponent implements OnInit {
   job_id: any;
   required_job_id: any;
   ngOnInit(): void {
-    this.onClick();
+    // this.onClick();
   }
   postDataaws() {
+    console.log(localStorage.getItem("eks_job_id"));
+    
     this.loading = true; 
     setTimeout(() => {
       this.loading = false; 
     }, 15000); 
-    const data = { 'job_id':localStorage.getItem("eks_job_id") };
-    this.RegisterService.postDataaws(data).subscribe(
+    const data = {  
+      username: localStorage.getItem("username") ?? '',
+      job_id: localStorage.getItem("eks_job_id") 
+    };
+    this.RegisterService.postDataaws(data.job_id,data).subscribe(
       (response) => {
         this.responseString = JSON.stringify(response);
       },
@@ -45,19 +50,21 @@ export class EksClusterredirectComponent implements OnInit {
       account_name:localStorage.getItem('account_name')
     };
     
-    this.service.postRedirectEksCluster(cluster).subscribe(
-      (res) => {
-        this.job_id = res.most_recent_job_id
-      }, (error) => {
-        this.toast.error(error.error.message);
-      }
-    );
+    // this.service.postRedirectEksCluster(cluster).subscribe(
+    //   (res) => {
+    //     this.job_id = res.most_recent_job_id
+    //   }, (error) => {
+    //     this.toast.error(error.error.message);
+    //   }
+    // );
+    this.job_id = localStorage.getItem("eks_job_id");
   }
   onSave() {
     const jobid = {
       username: localStorage.getItem("username") ?? '',
+      job_id: localStorage.getItem("eks_job_id")
     }
-    this.service.postRedirectlogEksCluster(this.job_id, jobid).subscribe(
+    this.service.postRedirectlogEksCluster(jobid.job_id, jobid).subscribe(
       (res) => {
         const _res = res.logs;
         this.responseString = _res;
