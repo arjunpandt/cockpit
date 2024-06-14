@@ -1,20 +1,12 @@
-# Use a newer version of Node.js
-FROM node:18-alpine as builder
-
-# Set the working directory
+FROM node:16-alpine as build
 WORKDIR /app
-
-# Copy the entire project directory into the Docker image
-COPY . .
-
-# Install dependencies
+COPY package*.json /app/
 RUN npm install
-
-# Install Angular CLI globally
-RUN npm install -g @angular/cli
-
-# Expose the port
-EXPOSE 4200
-
-# Start the Angular development server
-CMD ["ng", "serve", "--host", "0.0.0.0"]
+COPY ./ /app/
+# ENVIRONMENT is placeholder for qa or prod environments
+# It will change dynamically according to deployment on corresponding environments
+RUN npm run-script build
+FROM nginx:alpine
+RUN rm -rf /usr/share/nginx/html/*
+COPY --from=build /app/custom-nginx.conf /etc/nginx/conf.d/default.conf
+COPY --from=build /app/dist/cockpit/ /usr/share/nginx/html/
