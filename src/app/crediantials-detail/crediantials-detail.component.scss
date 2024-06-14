@@ -1,0 +1,345 @@
+.header-blue {
+    background: linear-gradient(316deg, #310e68 0%, #5f0f40 74%);
+    background-color: #184e8e;
+    font-family: 'Source Sans Pro', sans-serif;
+  }
+  
+  @media (min-width:768px) {
+    .header-blue {
+      position: static;
+    }
+  }
+  
+  .cloud-card{
+    display: flex; 
+    justify-content: space-evenly; 
+    margin-top: 21px; 
+    flex-wrap: wrap;
+  }
+  .header-blue .navbar {
+    background: transparent;
+    padding-top: .75rem;
+    padding-bottom: .75rem;
+    color: #fff;
+    border-radius: 0;
+    box-shadow: none;
+    border: none;
+  }
+  
+  @media (min-width:768px) {
+    .header-blue .navbar {
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+    }
+  }
+  
+  .header-blue .navbar .navbar-brand {
+    font-weight: bold;
+    color: inherit;
+  }
+  
+  .header-blue .navbar .navbar-brand:hover {
+    color: #f0f0f0;
+  }
+  
+  .header-blue .navbar .navbar-collapse {
+    border-top: 1px solid rgba(255,255,255,0.3);
+    margin-top: .5rem;
+  }
+  
+  @media (min-width:768px) {
+    .header-blue .navbar .navbar-collapse {
+      border-color: transparent;
+      margin: 0;
+    }
+  }
+  
+  .header-blue .action-button, .header-blue .action-button:not(.disabled):active {
+    border: 1px solid rgb(255,255,255);
+    border-radius: 40px;
+    color: #fff;
+    box-shadow: none;
+    text-shadow: none;
+    padding: .3rem .8rem;
+    background: transparent;
+    transition: background-color 0.25s;
+    outline: none;
+  }
+  
+  .header-blue .action-button:hover {
+    color: #fff;
+  }
+  
+  .header-blue .hero {
+    margin-top: 0px;
+    text-align: center;
+  }
+  
+  @media (min-width:768px) {
+    .header-blue .hero {
+      margin-top: 0px;
+      text-align: left;
+    }
+  }
+  
+    .header-blue .hero h1 {
+      color: #fff;
+      font-size: 40px;
+      line-height: 1.2;
+      font-weight: 300;
+    }
+  
+  
+  .header-blue .hero p {
+    color: rgba(255,255,255,0.8);
+    font-size: 20px;
+    margin-bottom: 30px;
+    font-weight: 300;
+  }
+  
+  .header-blue .phone-holder {
+    text-align: right;
+  }
+  
+  .header-blue div.iphone-mockup {
+    position: relative;
+    max-width: 300px;
+    margin-top: 172px;
+    display: inline-block;
+  }
+  
+  .header-blue .iphone-mockup img.device {
+    width: 100%;
+    height: auto;
+  }
+  
+  .header-blue .iphone-mockup .screen {
+    position: absolute;
+    width: 88%;
+    height: 77%;
+    top: 12%;
+    border-radius: 2px;
+    left: 6%;
+    border: 1px solid #444;
+    background-color: #aaa;
+    overflow: hidden;
+    /* background: url(../../assets/img/screen-content-iphone-6.jpg); */
+    background-size: cover;
+    background-position: center;
+  }
+  
+  .header-blue .iphone-mockup .screen:before {
+    content: '';
+    background-color: #fff;
+    position: absolute;
+    width: 70%;
+    height: 140%;
+    top: -12%;
+    right: -60%;
+    transform: rotate(-19deg);
+    opacity: 0.2;
+  }
+
+  @keyframes slideInFromBottom {
+    0% {
+      opacity: 0;
+      transform: translateY(50%);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .device {
+    animation-name: slideInFromBottom;
+    animation-duration: 1s;
+  }
+
+  .card {
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s;
+    border-radius: 5px;
+    max-width: 295px;
+    max-height: 295px;
+}
+
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    transform: translateY(-5px);
+
+}
+
+.card-img-top {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.card- {
+    padding: 20px;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.card-text {
+    font-size: 1rem;
+}
+
+
+  .card {
+    position: relative;
+    min-width: 249px;
+    height: 217px;
+    box-shadow: inset 5px 5px 5px rgba(0, 0, 0, 0.2),
+      inset -5px -5px 15px rgba(255, 255, 255, 0.1),
+      5px 5px 15px rgba(0, 0, 0, 0.3), -5px -5px 15px rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    margin: 30px;
+    transition: 0.5s;
+    cursor: pointer;
+  }
+  
+    .card .box {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    right: 20px;
+    bottom: 20px;
+    background: #2a2b2f;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    transition: 0.5s;
+    background-size: cover;
+  }
+  
+    .card .box:hover {
+    transform: translateY(-50px);
+  }
+  
+    .card .box:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.03);
+  }
+  
+    .card .box .content {
+    padding: 20px;
+    text-align: center;
+  }
+  
+    .card .box .content h2 {
+    position: absolute;
+    top: -10px;
+    right: 30px;
+    font-size: 8rem;
+    color: rgba(255, 255, 255, 0.1);
+  }
+  
+    .card .box .content h3 {
+    font-size: 1.8rem;
+    color: #fff;
+    z-index: 1;
+    transition: 0.5s;
+    margin-bottom: 15px;
+  }
+  
+    .card .box .content p {
+    font-size: 1rem;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.9);
+    z-index: 1;
+    transition: 0.5s;
+  }
+  
+    .card .box .content a {
+    position: relative;
+    display: inline-block;
+    padding: 8px 20px;
+    background: black;
+    border-radius: 5px;
+    text-decoration: none;
+    color: white;
+    margin-top: 20px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    transition: 0.5s;
+  }
+    .card .box .content a:hover {
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
+    background: #fff;
+    color: #000;
+    transform: translateY(-50px);
+  }
+  .card-label {
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+.box:hover + .card-label {
+    opacity : 1;
+}
+
+@keyframes slideInFromBottom {
+    0% {
+      opacity: 0;
+      transform: translateY(50%);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .device {
+    animation-name: slideInFromBottom;
+    animation-duration: 1s;
+  }
+
+
+  .loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.8); 
+    z-index: 9999; 
+  }
+  
+  .loader {
+    border: 6px solid #f3f3f3; 
+    border-top: 6px solid #3498db;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 2s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  .loading-text {
+    color: #333; 
+    font-size: 20px; 
+    margin-top: 20px; 
+  }

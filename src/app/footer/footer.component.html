@@ -1,0 +1,48 @@
+<footer>
+  <div class="container-fluid footer">
+    <div class="row align-items-center justify-content-start">
+      <div class="col-md-3 text-center ms-md-4" style="margin-left: 6.5rem !important;">
+        <img width="100%" src="https://www.nashtechglobal.com/wp-content/uploads/2023/03/NashTech-logo-White.svg"
+          alt="partner" style="width: 115px;
+          height: 115px;" />
+      </div>
+      <div class="col-md-7">
+      <div class="container-footer">
+        <div class="p-3" style="width: 100%;" *ngFor="let footerLink of footerLinks">
+          <div class="connect-content-container pr-0">
+            <div class="connect-content-wrapper ml-0 ml-md-5 ml-lg-0">
+            <h2>{{footerLink.heading}}</h2>
+            <ul class="p-0">
+              <li style="padding-top: 10px" *ngFor="let link of footerLink.links">
+                <a *ngIf="link.linkUrl.substr(0, 1) === '/'; else externalLink" [routerLink]="link.linkUrl"
+                  [innerHTML]="link.linkText"></a>
+                <ng-template #externalLink>
+                  <a [href]="link.linkUrl" target="_blank" [innerHTML]="link.linkText"></a>
+                </ng-template>
+              </li>
+            </ul>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+      <div class="partners-container" style="padding-top: 1rem">
+        <div class="partners-wrapper">
+          <div class="container-lg">
+            <hr class="container"/>
+          </div>
+        </div>
+      </div>
+      <div class="copyright-wrapper">
+        <div class="container-lg">
+          <div class="py-4">
+            <div class="copyright-content text-md-left">
+              &copy; 2024 NashTech <br />
+              <p>Part of Nash Squared</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>

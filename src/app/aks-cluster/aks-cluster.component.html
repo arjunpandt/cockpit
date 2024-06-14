@@ -1,0 +1,92 @@
+<div id="wrap" class="input">
+    <header class="input-header">
+        <h1>Create AKS Cluster</h1>
+    </header>
+    <section class="input-content">
+        <h2>Create AKS Cluster<span>AKS</span></h2>
+        <form class="form" [formGroup]="createForm" (ngSubmit)="onSubmit()">
+            <label for="name">Resource Group Name</label>
+            <input class="form__inset" type="text" formControlName="resource_group" placeholder="Resource Group Name" name="Resource Group Name">
+            <div class="form-text validation-message text-danger" *ngIf=" ResourceName.errors?.['required'] && (ResourceName.touched || ResourceName.dirty)">
+                Please enter Resource group name
+            </div>
+
+            <label for="name">Account Name</label>            
+            <div class="tooltip-container">
+                <select class="form__inset" formControlName="account_name" (change)="onAccountChange()">
+                    <option value="" disabled selected>Select Account Name</option>
+                    <option *ngFor="let acc of accountNames" [value]="acc">{{ acc }}</option>
+                </select>
+                <mat-icon matTooltip="You need to create an account first" class="info-icon">info</mat-icon>
+            </div>
+            <div class="form-text validation-message text-danger" *ngIf="AccountName.errors?.['required'] && (AccountName.touched || AccountName.dirty)">
+              Please select Account Name
+            </div>
+
+            <label for="name">Region</label>
+            <select class="form__inset" name="Region" formControlName="Region" placeholder="Region">
+                <option selected value="EAST US">EAST US</option>
+                <option value="WEST US">WEST US</option>
+                <option value="East Asia">East Asia</option>
+                <option value="Australia East">Australia East</option>
+                <option value="Canada Central">Canada Central</option>
+            </select>
+            <div class="form-text validation-message text-danger" *ngIf=" Region.errors?.['required'] && (Region.touched || Region.dirty)">
+                Please enter region
+            </div>
+
+            <label for="name">Availability Zone</label>
+            <select class="form__inset" formControlName="availability_zones" name="availability_zones">
+                <option value="none">none</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
+            <div class="form-text validation-message text-danger" *ngIf=" Availability.errors?.['required'] && (Availability.touched || Availability.dirty)">
+                Please enter Availability
+            </div>
+
+            <label for="name">AKS Name</label>
+            <input class="form__inset" type="text" formControlName="aks_name" placeholder="AKS Name" name="AKS Name">
+            <div class="form-text validation-message text-danger" *ngIf=" AksName.errors?.['required'] && (AksName.touched || AksName.dirty)">
+                Please enter AKS name
+            </div>
+
+            <label for="name">AKS Version</label>
+            <select class="form__inset" formControlName="aks_version" name="aks_version">
+                <option value=1.25.6>1.25.6</option>
+                <option value=1.25.11>1.25.11</option>
+                <option value=1.26.3>1.26.3</option>
+                <option value=1.27.1>1.27.1</option>
+                <option value=1.27.3>1.27.3</option>
+            </select>
+            <div class="form-text validation-message text-danger" *ngIf=" AksVersion.errors?.['required'] && (AksVersion.touched || AksVersion.dirty)">
+                Please enter AKS version
+            </div>
+
+            <label for="name">Node Count</label>
+            <input class="form__inset" type="text" formControlName="node_count" placeholder="Node Count" name="Node Count">
+            <div class="form-text validation-message text-danger" *ngIf=" NodeCount.errors?.['required'] && (NodeCount.touched || NodeCount.dirty)">
+                Please enter Node count
+            </div>
+
+            <label for="name">Cluster Type</label>
+            <select class="form__inset" formControlName="cluster_type" name="cluster_type">
+                <option value="Public">Public</option>
+                <option value="Private">Private</option>
+            </select>
+            <div class="form-text validation-message text-danger" *ngIf=" ClusterType.errors?.['required'] && (ClusterType.touched || ClusterType.dirty)">
+                Please enter Cluster type
+            </div>
+
+              <div *ngIf="showProgressBar" class="loading-overlay">
+                <div class="loader"></div>
+                <p class="loading-text">Just a moment! Creating Cluster...</p>
+              </div>
+        </form>
+        <div class="btns">
+            <button class="btn btn-cancel" (click)="onCancel()">Cancel</button>
+            <button class="btn btn-confirm"  routerLink="../aks-clusterredirect" [disabled]="createForm.invalid" (click)="onSubmit()">Submit</button>
+        </div>
+    </section>
+</div>

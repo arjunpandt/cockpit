@@ -1,0 +1,60 @@
+<div id="wrap" class="input">
+    <header class="input-header">
+        <h1>Delete EKS Cluster</h1>
+    </header>
+    <section class="input-content">
+        <h2>Delete EKS Cluster<span>EKS</span></h2>
+        <form class="form" [formGroup]="createForm" (ngSubmit)="onNextEks()">
+
+            <label for="account_name">Account Name</label>            
+            <select class="form__inset" formControlName="account_name" (change)="onAccountChange()">
+                <option value="" disabled selected>Select Account Name</option>
+                <option *ngFor="let acc of accountNames" [value]="acc">{{ acc }}</option>
+            </select>
+        <div class="form-text validation-message text-danger" *ngIf="AccountName.errors?.['required'] && (AccountName.touched || AccountName.dirty)">
+          Please select Account Name
+        </div>
+
+            <label for="name">EKS Name</label>
+            <select class="form__inset" formControlName="eks_name" name="eks_name" id="eks_name">
+                <option value="" disabled selected>Select EKS Name</option>
+                <ng-container *ngFor="let eks of sampleData">
+                    <option [value]="eks">{{eks}}</option>
+                </ng-container>
+            </select>
+            <div class="form-text validation-message text-danger"
+                *ngIf="EksName.errors?.['required'] && (EksName.touched || EksName.dirty)">
+                Please enter EKS name
+            </div>
+
+            <label for="name">Region</label>
+            <select class="form__inset" name="Region" formControlName="region" placeholder="Region"  [attr.disabled]="sampleData.length === 0 ? true : null && accountNames.length === 0 ? true : null">
+                <option value="us-east-1">US East-1</option>
+                <option value=" us-east-2"> US East-2</option>
+                <option value="us-west-1">US West-1</option>
+                <option value="us-west-2">US West-2</option>
+            </select>
+            <div class="form-text validation-message text-danger"
+                *ngIf=" Region.errors?.['required'] && (Region.touched || Region.dirty)">
+                Please enter Region
+            </div>
+
+            <label for="name">Node Group Name</label>
+            <input class="form__inset" type="text" formControlName="node" placeholder="Node Group Name"
+                name="Node Group Name" [attr.disabled]="sampleData.length === 0 ? true : null && accountNames.length === 0 ? true : null">
+            <div class="form-text validation-message text-danger"
+                *ngIf=" NodeGroupName.errors?.['required'] && (NodeGroupName.touched || NodeGroupName.dirty)">
+                Please enter Node Group Name
+            </div>
+
+            <div *ngIf="showProgressBar" class="loading-overlay">
+                <div class="loader"></div>
+                <p class="loading-text">Just a moment! Deleting Cluster...</p>
+            </div>
+        </form>
+        <div class="btns">
+            <button class="btn btn-cancel" (click)="onCancel()">Cancel</button>
+            <button class="btn btn-confirm" [disabled]="createForm.invalid" (click)="onNextEks()">Delete</button>
+        </div>
+    </section>
+</div>

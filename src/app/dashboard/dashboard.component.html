@@ -1,0 +1,34 @@
+<div class="header-blue">
+    <div class="container hero">
+        <div class="row">
+            <div *ngIf="!isLoggedIn" class="device dashboard col-12 col-lg-6 col-xl-5 offset-xl-1">
+                <h1>Cockpit Pro</h1>
+                <p>Ready to take your cloud management to the next level? Unlock the full potential of
+                    Cockpit Pro's Goldilocks and FinOps capabilities with our Pro version. Get detailed
+                    insights into resource utilization patterns, allocate resources based on real-time data,
+                    and optimize your cloud costs like never before.<br></p>
+                <button class="btn btn-light action-button" (click)="onLogin()">Get Started</button>
+            </div>
+
+            <div *ngIf="isLoggedIn" class="device dashboard col-12 col-lg-6 col-xl-5 offset-xl-1">
+                <h1>Cockpit Pro</h1>
+                <p>Welcome to our Cockpit-pro! To begin the power of cloud computing and managing your clusters
+                    efficiently, you'll first need to integrate your cloud accounts with our platform. Follow these
+                    simple steps to get started:<br>
+                </p>
+                <ul class="steps">
+                    <li>Add Account : First you can add your multiple account of their respective cloud through account details button.</li>
+                    <li>Create Cluster: When your account is added then you can create your cluster through create cluster button.</li>
+                </ul>
+                <button class="btn btn-light action-button" (click)="onLogin()">Get Started</button>
+            </div>
+            <div class="col-lg-5 offset-lg-1 offset-xl-0 d-lg-block phone-holder">
+                <div class="iphone-mockup">
+                    <img class="device" src="../../assets/cockpit.png" id="animatedImage">
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<router-outlet></router-outlet>

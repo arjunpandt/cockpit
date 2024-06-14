@@ -1,0 +1,50 @@
+<div id="wrap" class="input">
+    <header class="input-header">
+      <h1>Delete AKS Cluster</h1>
+    </header>
+    <section class="input-content">
+      <h2>Delete AKS Cluster<span>AKS</span></h2>
+      <form class="form" [formGroup]="createForm" (ngSubmit)="onSubmit()">
+  
+
+        <label for="account_name">Account Name</label>            
+            <select class="form__inset" formControlName="account_name" (change)="onAccountChange()">
+                <option value="" disabled selected>Select Account Name</option>
+                <option *ngFor="let acc of accountNames" [value]="acc">{{ acc }}</option>
+            </select>
+        <div class="form-text validation-message text-danger" *ngIf="AccountName.errors?.['required'] && (AccountName.touched || AccountName.dirty)">
+          Please select Account Name
+        </div>
+
+        <label for="aks_name">AKS Name</label>
+        <!-- Use a select element for the dropdown -->
+        <select class="form__inset" formControlName="aks_name" name="aks_name" id="aks_name">
+            <option value="" disabled selected>Select AKS Name</option>
+            <ng-container *ngFor="let aks of sampleData">
+              <option [value]="aks">{{aks}}</option>
+            </ng-container>
+          </select>
+        <div class="form-text validation-message text-danger"
+          *ngIf="AksName.errors?.['required'] && (AksName.touched || AksName.dirty)">
+          Please select AKS name
+        </div>
+  
+        <label for="resource_group">Resource Group Name</label>
+        <input class="form__inset" type="text" formControlName="resource_group" placeholder="Resource Group Name"
+          name="Resource Group Name"  [attr.disabled]="accountNames.length === 0 ? true : null">
+        <div class="form-text validation-message text-danger"
+          *ngIf="ResourceName.errors?.['required'] && (ResourceName.touched || ResourceName.dirty)">
+          Please enter Resource group name
+        </div>
+        <div *ngIf="showProgressBar" class="loading-overlay">
+          <div class="loader"></div>
+          <p class="loading-text">Just a moment! Deleting Cluster...</p>
+        </div>
+      </form>
+      <div class="btns">
+        <button class="btn btn-cancel" (click)="onCancel()">Cancel</button>
+        <button class="btn btn-confirm" [disabled]="createForm.invalid" (click)="onSubmit()">Delete</button>
+      </div>
+    </section>
+  </div>
+  

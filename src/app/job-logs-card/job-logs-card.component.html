@@ -1,0 +1,42 @@
+<!-- cluster-creation-card.component.html -->
+<div *ngIf="!showCard" class="card">
+    <span class="tag">{{ cardTitle }}</span>
+    <div *ngFor="let item of getObjectKeys(sampleData)" class="card-item">
+      <strong>{{ item }}:</strong>
+      <ng-container *ngIf="isArrayWithData(item)">
+        <!-- Display a dropdown for arrays with data -->
+        <select class="dropdown" [(ngModel)]="selectedArrayValue" (change)="createObject()">
+          <option *ngFor="let arrayItem of getArray(item)">{{ arrayItem }}</option>
+        </select>
+      </ng-container>
+      <ng-container *ngIf="isArrayWithoutData(item)">
+        <!-- Display a message if the array is empty -->
+        No data available.
+      </ng-container>
+      <ng-container *ngIf="!isObject(sampleData[item]) && !isArray(sampleData[item])">
+        {{ sampleData[item] }}
+      </ng-container>
+    </div>
+  </div>
+  
+  <div *ngIf="showCard">
+    <!-- Show a different instance of the same component without the submit button -->
+    <div class="card">
+      <span class="tag">{{ cardTitle }}</span>
+      <div *ngFor="let item of getObjectKeys(sampleData)" class="card-item">
+        <strong>{{ item }}:</strong>
+        <!-- Display the data for the new card -->
+        <ng-container *ngIf="isArray(sampleData[item])">
+          <ul>
+            <li *ngFor="let arrayItem of getObjectValues(sampleData[item])">{{ arrayItem }}</li>
+          </ul>
+        </ng-container>
+        <ng-container *ngIf="!isArray(sampleData[item])">
+          {{ sampleData[item] }}
+        </ng-container>
+      </div>
+      <!-- Only show the "Back" button for the new card -->
+      <button class="button-style" (click)="onBack()">Back</button>
+    </div>
+  </div>
+  

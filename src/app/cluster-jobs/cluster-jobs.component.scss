@@ -1,0 +1,125 @@
+.container {
+    max-width: 100%;
+    margin: auto;
+    height: 100vh;
+  }
+  
+  .heading {
+    margin-top: 10rem;
+    color: #fff;
+    font-size: 2rem;
+  }
+  
+  .table-container {
+    position: relative;
+    overflow-y: auto;
+    margin-top: 2rem;
+    width: 100%;
+    max-height: 70vh;
+  }
+  
+  .table {
+    width: 100%;
+    overflow: auto;
+    border-collapse: collapse;
+  }
+  
+  .table thead th,
+  .table tbody td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+  }
+  
+  .table-hover tbody tr:hover {
+    background-color: #f5f5f5;
+  }
+  
+  .header-blue {
+    background: linear-gradient(316deg, #310e68 0%, #5f0f40 74%);
+    background-color: #184e8e;
+    font-family: 'Source Sans Pro', sans-serif;
+    padding: 1rem;
+  }
+  
+  @media (min-width: 768px) {
+    .header-blue {
+      position: static;
+    }
+  }
+  
+  .loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.8);
+    z-index: 9999;
+  }
+  
+  .loader {
+    border: 6px solid #f3f3f3;
+    border-top: 6px solid #3498db;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 2s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
+  .loading-text {
+    color: #333;
+    font-size: 20px;
+    margin-top: 20px;
+  }
+  
+
+  .no-data-message {
+    font-size: 24px;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+.dialog {
+  width: auto;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border: 1px solid #ccc;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+}
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+.app-job-logs-card {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}

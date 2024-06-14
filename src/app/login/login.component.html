@@ -1,0 +1,77 @@
+<div class="container" id="container">
+    <div class="form-container sign-up-container">
+        <form [formGroup]="createForm" (ngSubmit)="onSubmit()">
+            <h1>Create Account</h1>
+            <input type="text" formControlName="username" placeholder="Username" />
+            <div class="form-text validation-message text-danger" *ngIf=" Username.errors?.['required'] && (Username.touched || Username.dirty)">
+                Please enter Username
+            </div>
+            <div class="form-text validation-message text-danger" *ngIf=" Username.errors?.['minlength'] && (Username.touched || Username.dirty)">
+                Username is too short
+            </div>
+
+            <input type="email" formControlName="email" placeholder="Email" />
+            <div class="form-text validation-message text-danger" *ngIf=" Email.errors?.['required'] && (Email.touched || Email.dirty)">
+                Please enter email
+            </div>
+
+            <div class="form-text validation-message text-danger" *ngIf=" Email.errors?.['email'] && (Email.touched || Email.dirty)">
+                Email is incorrect
+            </div>
+
+            <input type="password" formControlName="password" placeholder="Password" />
+            <div class="form-text validation-message text-danger" *ngIf=" Password.errors?.['required'] && (Password.touched || Password.dirty)">
+                Please enter Password
+            </div>
+            <div class="form-text validation-message text-danger" *ngIf=" Password.errors?.['minlength'] && (Password.touched || Password.dirty)">
+                Password is too short
+            </div>
+
+            <input type="password" formControlName="confirm_password" placeholder="Confirm Password" />
+            <div class="form-text validation-message text-danger" [ngStyle]="{'display':repeatPassword}">
+                Confirm Password is Invalid
+            </div>
+            <button [disabled]="createForm.invalid">Sign Up</button>
+        </form>
+    </div>
+    <div class="form-container sign-in-container">
+        <form [formGroup]="loginForm" (ngSubmit)="onLoginSubmit()">
+            <h1>Sign in</h1>
+            <input type="email" formControlName="email" placeholder="Email" />
+            <div class="form-text validation-message text-danger" *ngIf=" LoginEmail.errors?.['required'] && (LoginEmail.touched || LoginEmail.dirty)">
+                Please enter email
+            </div>
+
+            <div class="form-text validation-message text-danger" *ngIf=" LoginEmail.errors?.['email'] && (LoginEmail.touched || LoginEmail.dirty)">
+                Email is incorrect
+            </div>
+
+            <input type="password" formControlName="password" placeholder="Password" />
+            <div class="form-text validation-message text-danger" *ngIf=" LoginPassword.errors?.['required'] && (LoginPassword.touched || LoginPassword.dirty)">
+                Please enter Password
+            </div>
+
+            
+            <button [disabled]="loginForm.invalid">Sign In</button>
+        </form>
+    </div>
+    <div class="overlay-container">
+        <div class="overlay">
+            <div class="overlay-panel overlay-left">
+                <h1>Welcome Back!</h1>
+                <p>To keep connected with us please login with your personal info</p>
+                <button class="ghost" id="signIn">Sign In</button>
+            </div>
+            <div class="overlay-panel overlay-right">
+                <h1>Hello, Friend!</h1>
+                <p>Enter your personal details and start journey with us</p>
+                <button class="ghost" id="signUp">Sign Up</button>
+            </div>
+        </div>
+        <div *ngIf="showProgressBar" class="loading-overlay">
+            <div class="loader"></div>
+            <p class="loading-text">Logging In...</p>
+          </div>
+
+    </div>
+</div>

@@ -1,0 +1,76 @@
+<div class="header-blue">
+  <div class="container hero">
+    <!-- <div class="row device">
+      <h1>Welcome to Cockpit Pro</h1>
+      <p>Cockpit Pro revolutionizes the way you create and manage cloud hosted
+        Kubernetes clusters. With just a single click, you can launch a fully
+        functional multi-cloud Kubernetes cluster tailored to your needs.
+        Say goodbye to the complexities of manual setup and configuration – Cockpit Pro
+        simplifies cluster deployment while providing you with advanced insights into
+        resource utilization through the application of Goldilocks and FinOps principles.<br></p>
+    </div> -->
+    <div class="home-card device">
+
+      <div class="tabs">
+        <div *ngFor="let tab of tabs; let i = index" (click)="onTabClick(i)" [class.active]="selectedTabIndex === i">
+          {{ tab }}
+        </div>
+      </div>
+
+      <div class="table">
+        <table>
+          <ng-container *ngIf="selectedTabIndex !== null">
+            <ng-container [ngSwitch]="selectedTabIndex">
+              <app-cloud-selection *ngSwitchCase="0"></app-cloud-selection>
+              <app-my-cluster *ngSwitchCase="1"></app-my-cluster>
+              <app-crediantials-detail *ngSwitchCase="2"></app-crediantials-detail>
+              <app-cluster-status *ngSwitchCase="3"></app-cluster-status>
+              <ng-container *ngSwitchCase="4">
+                <div class="cost-optimization-message">
+                  <p>Subscribers to our premium package will benefit from the deployment of CAST AI 
+                    to their cluster for cost optimization. This platform excels in Kubernetes automation, 
+                    offering consistent savings through various optimization features, ensuring a balance between performance, 
+                    availability, and cost. By subscribing, you will gain access to these benefits, contributing to enhanced 
+                    Kubernetes management and significant cost savings.</p>
+                  <!-- <a href="http://98.70.13.238:3030/" class="btn btn-light action-button" target="_blank">Get Subscription</a> -->
+                  <button class="payButton" (click)="payNow()">Get Subscription</button>
+                </div>
+              </ng-container>
+              <app-delete-cloud-selection *ngSwitchCase="5"></app-delete-cloud-selection>
+            </ng-container>
+          </ng-container>
+
+        </table>
+      </div>
+    </div>
+    <!-- <div class="home-card">
+
+                <div class="card-grid-space device">
+                  <a class="card" href="/home/cloud-selection" style="--bg-img: url(https://i0.wp.com/networknuts.net/wp-content/uploads/2020/01/kubernetes-training-delhi.jpg)">
+                    <div>
+                      <h1>Create Cluster</h1>
+                      <p>Optimize performance and scalability with a reliable cluster infrastructure.</p>
+                    </div>
+                  </a>
+                </div>
+                <div class="card-grid-space device">
+                  <a class="card" href="/home/delete-cloud-selection" style="--bg-img: url(https://spaceliftio.wpcomstaging.com/wp-content/uploads/2022/10/125.delete-pods-from-kubernetes-node-238x260.png?crop=1)">
+                    <div>
+                      <h1>Delete Cluster</h1>
+                      <p>Delete clusters effortlessly. Streamline your cloud management with a few clicks.</p>
+                    </div>
+                  </a>
+                </div>
+                <div class="card-grid-space device">
+                  <a class="card" href="/home/cloud-selection" style="--bg-img: url('./../assets/cloud.jpg')">
+                    <div>
+                      <h1>Cloud Credentials</h1>
+                      <p>Secure cloud credentials with effective measures.</p>
+                    </div>
+                  </a>
+                </div>
+                </div> -->
+  </div>
+</div>
+
+<router-outlet></router-outlet>

@@ -1,0 +1,45 @@
+<div *ngIf="!showCard" class="header-blue">
+    <div class="container hero">
+        <div>
+            <div class="row device">
+                <h1>Select  Cloud</h1>
+
+            </div>
+            <div class="cloud-card">
+                <div class="card device">
+                    <div class="box" style="background-image: url(../../assets/aws.png);" (click)="onNextEks()">
+                    </div>
+                    <div class="card-label">
+                        <h3 style="color: black; text-align: center;">AWS</h3>
+                    </div>
+                </div>
+
+                <div class="card device">
+                    <div class="box" style="background-image: url(./../assets/Azure.png);" (click)="onClickAzure()">
+                    </div>
+                    <div class="card-label">
+                        <h3 style="color: black; text-align: center;">Azure</h3>
+                    </div>
+                </div>
+
+                <div class="card device">
+                    <div class="box" style="background-image: url(./../assets/gcp.jpg);" (click)="onClickGcp()">
+                    </div>
+                    <div class="card-label">
+                        <h3 style="color: black; text-align: center;">GCP</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div *ngIf="showProgressBar" class="loading-overlay">
+    <div class="loader"></div>
+    <p class="loading-text">Just a moment...</p>
+</div>
+
+<div *ngIf="showCard">
+    <app-cluster-card [cardTitle]="cardTitle" [sampleData]="sampleData"></app-cluster-card>
+</div>

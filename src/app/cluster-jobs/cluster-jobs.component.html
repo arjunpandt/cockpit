@@ -1,0 +1,49 @@
+<div class="header-blue">
+  <div class="container hero">
+      <div class="container-md">
+          <div class="row device">
+              <h1 class="heading">{{title}}</h1>
+          </div>
+
+          <div class="table-container">
+              <table class="table table-bordered table-hover">
+                  <thead class="thead-dark">
+                      <tr>
+                          <th>Created At</th>
+                          <th>Created By</th>
+                          <th>{{StausName}}</th>
+                          <th>Job ID</th>
+                          <th>Job Name</th>
+                      </tr>
+                  </thead>
+                  <tbody *ngIf="apiData && apiData.length > 0; else noData">
+                      <tr *ngFor="let element of apiData">
+                          <td>{{ element.created_at | date: 'dd MMMM yyyy, HH:mm:ss' }}</td>
+                          <td>{{ element.created_by }}</td>
+                          <td>{{ element[propertyName] }}</td>
+                          <td style="cursor: pointer;" (click)="getJobDetails(element.job_id)">{{ element.job_id }}</td>
+                          <td>{{ element.job_name }}</td>
+                      </tr>
+                  </tbody>
+              </table>
+
+              <ng-template #noData>
+                  <tr>
+                      <td colspan="5" class="no-data-message">No data found</td>
+                  </tr>
+              </ng-template>
+          </div>
+      </div>
+  </div>
+</div>
+
+<div *ngIf="showCard" class="backdrop" (click)="closeDialog()">
+    <div class="dialog" (click)="preventClose($event)">
+    <app-job-logs-card [cardTitle]="title" [sampleData]="sampleData"></app-job-logs-card>
+</div>
+</div>
+
+<div *ngIf="showProgressBar" class="loading-overlay">
+  <div class="loader"></div>
+  <p class="loading-text">Just a moment...</p>
+</div>

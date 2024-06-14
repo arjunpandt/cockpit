@@ -1,0 +1,13 @@
+<div class="header-blue">
+    <div class="container hero">
+        <div class="cluster">
+            <h1><b>Cluster creation is in process ..<br>you can check your cluster here...</b></h1>
+            <button class="btns btn btn-light action-button" (click)="postDataaws()"> Check Here!!!</button>
+        </div>
+    </div>
+    <div class="color" *ngIf="responseString">
+        <h3>Response Data:</h3>
+        <p>{{ responseString }}</p>
+    </div>
+    <div *ngIf="loading" class="loader"></div> 
+</div>
