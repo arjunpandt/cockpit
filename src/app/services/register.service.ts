@@ -248,8 +248,8 @@ export class RegisterService {
     return this.httpClient.post<any>(`${environment.api.baseUrl}json-recentjoblogs-gcp?job_id=${this.jobId}`, data);
   }
 
-  postDataaws(data: any) {
-    return this.httpClient.post<any>(`${environment.api.baseUrl}json-recentjoblogs-aws?job_id=${this.jobId}`, data);
+  postDataaws(jobId:any,data: any) {
+    return this.httpClient.post<any>(`${environment.api.baseUrl}json-recentjoblogs-aws?job_id=${jobId}`, data);
   }
 
   postAksClusterStatus(body: any): Observable<any> {
