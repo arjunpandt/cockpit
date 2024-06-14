@@ -1,0 +1,39 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches: ['main']
+    paths: ['src/**']
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+      
+ 
+
+    - name: Build Docker image
+      run: |
+       docker build -t shahenvaz7/angularfrontend:$GITHUB_RUN_ID
+       docker push -t shahenvaz7/angularfrontend:$GITHUB_RUN_ID
+
+  deploy:
+    runs-on: ubuntu-latest
+
+    needs: build
+
+
+    steps:
+    - uses: actions/checkout@master
+    - name: deploy to GKE
+      uses: ameydev/gke-kubectl-action@master
+      env:
+        PROJECT_ID: ${{ secrets.PROJECT_ID }}
+        APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+        CLUSTER_NAME: ${{ secrets.GKE_CLUSTER_NAME }}
+        ZONE_NAME: us-central1-f
+      with:
+        args: set image -f frontend_deployment.yaml angular-frontend=shahenvaz7/angularfrontend:$GITHUB_RUN_ID
