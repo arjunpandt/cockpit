@@ -17,8 +17,16 @@ export class EksClusterredirectComponent implements OnInit {
   ) { }
   job_id: any;
   required_job_id: any;
+  eks_job_id=localStorage.getItem("eks_job_id")
   ngOnInit(): void {
     // this.onClick();
+    const checkEksId= setInterval(()=>{
+      console.log("test",localStorage.getItem("eks_job_id"));
+      this.eks_job_id=localStorage.getItem("eks_job_id")
+      if(this.eks_job_id){
+        clearInterval(checkEksId)
+      }
+    },1000)
   }
   postDataaws() {
     console.log(localStorage.getItem("eks_job_id"));
