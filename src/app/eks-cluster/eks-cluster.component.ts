@@ -72,6 +72,7 @@ export class EksClusterComponent implements OnInit {
   // }
 
   onNextEks(){
+    localStorage.removeItem('eks_job_id')
     this.router.navigate(["/home/cloud-selection/aws/aws2/redirect"]) 
     this.showProgressBar = true;
     this.service.postEksCluster(this.createForm.value).subscribe((res)=>{
@@ -128,7 +129,7 @@ export class EksClusterComponent implements OnInit {
       const recentJobCheck = setInterval(()=>{
         this.service.postRedirectEksCluster(dataforRecentJobCheck).subscribe(
           (res) => {
-            
+
             if(res.id==="true"){
               this.job_id = res.most_recent_job_id 
               localStorage.setItem('eks_job_id',res.most_recent_job_id)
