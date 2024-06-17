@@ -20,7 +20,7 @@ getTestBed().initTestEnvironment(
   platformBrowserDynamicTesting(),
 );
 
-// Then we find all the tests. adding this comment for pipeline testing
+// Then we find all the tests. adding this comment for pipeline testing 2
 const context = require.context('./', true, /\.spec\.ts$/);
 // And load the modules.
 context.keys().forEach(context);
