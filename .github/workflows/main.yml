@@ -17,8 +17,8 @@ jobs:
 
     - name: Build Docker image
       run: |
-       docker build -t shahenvaz7/angularfrontend:$GITHUB_RUN_ID
-       docker push -t shahenvaz7/angularfrontend:$GITHUB_RUN_ID
+       docker build -t shahenvaz7/angularfrontend:$GITHUB_RUN_ID .
+       docker push shahenvaz7/angularfrontend:$GITHUB_RUN_ID
 
   deploy:
     runs-on: ubuntu-latest
