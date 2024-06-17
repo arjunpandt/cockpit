@@ -18,7 +18,7 @@ jobs:
     - name: Build Docker image
       run: |
        docker build -t shahenvaz7/angularfrontend:$GITHUB_RUN_ID .
-       docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+       echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin 
        docker push shahenvaz7/angularfrontend:$GITHUB_RUN_ID
 
   deploy:
