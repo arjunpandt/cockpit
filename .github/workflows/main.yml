@@ -28,7 +28,6 @@ jobs:
 
 
     steps:
-    - uses: actions/checkout@master
     - name: deploy to GKE
       uses: ameydev/gke-kubectl-action@master
       env:
