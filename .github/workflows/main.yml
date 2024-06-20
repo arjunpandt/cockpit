@@ -31,7 +31,7 @@ jobs:
     - name: deploy to GKE
       uses: ameydev/gke-kubectl-action@master
       env:
-        PROJECT_ID: ${{ secrets.PROJECT_ID }}
+        PROJECT_ID: ${{ env.PROJECT_ID }}
         APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
         CLUSTER_NAME: ${{ secrets.GKE_CLUSTER_NAME }}
         ZONE_NAME: ${{ secrets.REGION }}
