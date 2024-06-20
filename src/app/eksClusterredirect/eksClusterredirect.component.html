@@ -1,7 +1,8 @@
 <div class="header-blue">
     <div class="container hero">
         <div class="cluster">
-            <h1><b>Cluster creation is in process ..<br>you can check your cluster here...</b></h1>
+            <h1 *ngIf="!eks_job_id"><b>Cluster creation is in process!<br>Please wait for some time we are currently fetching your job id....</b></h1>
+            <h1 *ngIf="eks_job_id"><b>Cluster creation is in process..<br>Now you can check your pipeline  here.</b></h1>
             <button class="btns btn btn-light action-button" [disabled]="!eks_job_id" (click)="postDataaws()"> Check Here!!!</button>
         </div>
     </div>
