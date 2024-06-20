@@ -35,6 +35,6 @@ jobs:
         PROJECT_ID: ${{ vars.PROJECT_ID }}
         APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
         CLUSTER_NAME: ${{ secrets.GKE_CLUSTER_NAME }}
-        ZONE_NAME: ${{ secrets.REGION }}
+        ZONE_NAME: us-central1-f
       with:
         args: set image -f frontend_deployment.yaml angular-frontend=shahenvaz7/angularfrontend:$GITHUB_RUN_ID
