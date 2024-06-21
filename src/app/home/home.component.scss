@@ -375,7 +375,6 @@
   }
 
   .cost-optimization-message {
-    margin-top: 38px;
     font-weight: bold;
     margin-left: 63px;
 
@@ -385,8 +384,11 @@
   }
   
   .table {
+    display: flex;
     flex: 2;
     overflow-y: auto;
     width: 100%;
+    // margin-top: 100px;
+    align-items: center;
   }
   
