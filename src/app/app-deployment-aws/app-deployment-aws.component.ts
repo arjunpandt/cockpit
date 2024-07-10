@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { RegisterService } from '../services/register.service';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-app-deployment-aws',
@@ -18,7 +19,7 @@ export class AppDeploymentAwsComponent implements OnInit {
     branch: new FormControl('',[Validators.required])
   });
 
-  constructor(private service:RegisterService, private toast:ToastrService) { }
+  constructor(private service:RegisterService, private toast:ToastrService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -58,6 +59,11 @@ export class AppDeploymentAwsComponent implements OnInit {
         this.toast.error(error.error.error)
       })
     }
+  }
+
+  onCancel(){
+    console.log("test");
+    this.router.navigate(["/home"]);
   }
 
   get GithubURL():FormControl{

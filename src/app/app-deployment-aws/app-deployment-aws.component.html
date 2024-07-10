@@ -27,8 +27,8 @@
             </div>
             
                 <label *ngIf="this.createForm.value['repo_type']==='private_repo'" for="name">Private Token</label>
-                <input *ngIf="this.createForm.value['repo_type']==='private_repo'" class="form__inset" type="text" formControlName="private_token" placeholder="Private Token"
-                    name="Private Token">
+                <input *ngIf="this.createForm.value['repo_type']==='private_repo'" class="form__inset" type="password" formControlName="private_token" placeholder="Private Token"
+                    name="Private Token" >
                 <div class="form-text validation-message text-danger"
                     *ngIf=" PrivateToken.errors?.['required'] && (PrivateToken.touched || PrivateToken.dirty) && this.createForm.value['repo_type']==='private_repo'">
                     Please Enter Private Token
@@ -53,7 +53,7 @@
               </div>
         </form>
         <div class="btns">
-            <button class="btn btn-cancel">Cancel</button>
+            <button class="btn btn-cancel" (click)="onCancel()">Cancel</button>
             <button class="btn btn-confirm" [disabled]="createForm.invalid"
                 (click)="onSubmit()">Submit</button>
         </div>
