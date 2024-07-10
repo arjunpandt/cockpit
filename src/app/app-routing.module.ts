@@ -18,6 +18,8 @@ import { ClusterJobsComponent } from './cluster-jobs/cluster-jobs.component';
 import { AksClusterredirectComponent } from './aksClusterredirect/aksClusterredirect.component';
 import { EksClusterredirectComponent } from './eksClusterredirect/eksClusterredirect.component';
 import { GkeClusterredirectComponent } from './gkeClusterredirect/gkeClusterredirect.component';
+import { AppDeploymentComponent } from './app-deployment/app-deployment.component';
+import { AppDeploymentAwsComponent } from './app-deployment-aws/app-deployment-aws.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -120,6 +122,26 @@ const routes: Routes = [
               }
             ]
           },
+        ]
+      },{
+        path:"app-deployment",
+        children:[
+          {
+            path:'',
+            component:AppDeploymentComponent
+          },
+          {
+            path:'aws',
+            component:AppDeploymentAwsComponent
+          },
+          {
+            path:'azure',
+            component:AppDeploymentAwsComponent
+          },
+          {
+            path:'google',
+            component:AppDeploymentAwsComponent
+          }
         ]
       },
       {

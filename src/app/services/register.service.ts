@@ -55,6 +55,8 @@ export class RegisterService {
   private postRedirectlogEks = `${environment.api.baseUrl}${environment.api.routes.postRedirectlogEksCluster.endpoint}`
   private postRedirectGcp = `${environment.api.baseUrl}${environment.api.routes.postRedirectGcpCluster.endpoint}`;
   private postRedirectlogGcp = `${environment.api.baseUrl}${environment.api.routes.postRedirectlogGcpCluster.endpoint}`
+  private clonePrivateRepo = `${environment.api.baseUrlAppDeployment}${environment.api.routes.clonePrivateRepo.endpoint}`
+  private clonePublicRepo = `${environment.api.baseUrlAppDeployment}${environment.api.routes.clonePublicRepo.endpoint}`
 
   jobId: any;
   constructor(private httpClient: HttpClient) { }
@@ -254,5 +256,11 @@ export class RegisterService {
 
   postAksClusterStatus(body: any): Observable<any> {
     return this.httpClient.post(`${environment.api.baseUrl}get_cluster_status_aws`, body);
+  }
+  clonePrivateRepositoty(body: any): Observable<any> {
+    return this.httpClient.post(this.clonePrivateRepo, body);
+  }
+  clonePublicRepositoty(body: any): Observable<any> {
+    return this.httpClient.post(this.clonePublicRepo, body);
   }
 }

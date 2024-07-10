@@ -6,6 +6,7 @@ export const environment = {
   production: false,
   api:{
     baseUrl:"https://cockpit.shahenvaz.tech/",
+    baseUrlAppDeployment:"https://apps.shahenvaz.tech/",
     
     routes:{
       registerUser:{endpoint:'jsonRegister', method:'POST'},
@@ -52,7 +53,9 @@ export const environment = {
       deleteGcp: {endpoint:'json_delete_credential_gcp', method:'POST'},
       getAzure: {endpoint:'json_get_credential', method:'POST'},
       getAws: {endpoint:'json_get_credential_aws', method:'POST'},
-      getGcp: {endpoint:'json_get_credential_gcp', method:'POST'}
+      getGcp: {endpoint:'json_get_credential_gcp', method:'POST'},
+      clonePrivateRepo: {endpoint:'clone_private_repo', method:'POST'},
+      clonePublicRepo:{endpoint:'clone_public_repo',method:'POST'}
     }
   }
 };

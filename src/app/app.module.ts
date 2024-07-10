@@ -38,6 +38,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { AksClusterredirectComponent } from './aksClusterredirect/aksClusterredirect.component';
 import { EksClusterredirectComponent } from './eksClusterredirect/eksClusterredirect.component';
 import { GkeClusterredirectComponent } from './gkeClusterredirect/gkeClusterredirect.component';
+import { AppDeploymentComponent } from './app-deployment/app-deployment.component';
+import { AppDeploymentAwsComponent } from './app-deployment-aws/app-deployment-aws.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -68,6 +70,8 @@ import { GkeClusterredirectComponent } from './gkeClusterredirect/gkeClusterredi
     AksClusterredirectComponent,
     EksClusterredirectComponent,
     GkeClusterredirectComponent,
+    AppDeploymentComponent,
+    AppDeploymentAwsComponent,
   ],
   imports: [
     BrowserModule,

@@ -25,7 +25,8 @@
               <app-my-cluster *ngSwitchCase="1"></app-my-cluster>
               <app-crediantials-detail *ngSwitchCase="2"></app-crediantials-detail>
               <app-cluster-status *ngSwitchCase="3"></app-cluster-status>
-              <ng-container *ngSwitchCase="4">
+              <app-deployment *ngSwitchCase="4" ></app-deployment>
+              <ng-container *ngSwitchCase="5">
                 <div class="cost-optimization-message">
                   <p>Subscribers to our premium package will benefit from the deployment of CAST AI 
                     to their cluster for cost optimization. This platform excels in Kubernetes automation, 
@@ -35,7 +36,7 @@
                   <button class="payButton" (click)="payNow()">Get Subscription</button>
                 </div>
               </ng-container>
-              <app-delete-cloud-selection *ngSwitchCase="5"></app-delete-cloud-selection>
+              <app-delete-cloud-selection *ngSwitchCase="6"></app-delete-cloud-selection>
             </ng-container>
           </ng-container>
 

@@ -1,0 +1,61 @@
+<div id="wrap" class="input">
+    <header class="input-header">
+        <h1>Application Deployment</h1>
+    </header>
+    <section class="input-content">
+        <h2>Application Deployment</h2>
+        <form class="form" [formGroup]="createForm" (ngSubmit)="onSubmit()">
+            <label for="name">GitHub URL</label>
+            <input class="form__inset" type="text" formControlName="githuburl" placeholder="GitHub URL"
+                name="GitHub URL">
+            <div class="form-text validation-message text-danger"
+                *ngIf=" GithubURL.errors?.['required'] && (GithubURL.touched || GithubURL.dirty)">
+                Please Enter GitHub URL
+            </div>
+            <label for="name">Repository Type</label>
+            <div class="tooltip-container">
+                <select class="form__inset" formControlName="repo_type">
+                    <option value="" disabled selected>Select Repository Type</option>
+                    <option value="private_repo">Private Repo</option>
+                    <option value="public_repo">Public Repo</option>
+                </select>
+                <mat-icon matTooltip="You need to select the Repository Type" class="info-icon">info</mat-icon>
+            </div>
+            <div class="form-text validation-message text-danger"
+                *ngIf="RepoType.errors?.['required'] && (RepoType.touched || RepoType.dirty)">
+                Please select Account Name
+            </div>
+            
+                <label *ngIf="this.createForm.value['repo_type']==='private_repo'" for="name">Private Token</label>
+                <input *ngIf="this.createForm.value['repo_type']==='private_repo'" class="form__inset" type="text" formControlName="private_token" placeholder="Private Token"
+                    name="Private Token">
+                <div class="form-text validation-message text-danger"
+                    *ngIf=" PrivateToken.errors?.['required'] && (PrivateToken.touched || PrivateToken.dirty) && this.createForm.value['repo_type']==='private_repo'">
+                    Please Enter Private Token
+                </div>
+            
+            <label for="name">Project Name</label>
+            <input class="form__inset" type="text" formControlName="project_name" placeholder="Project Name"
+                name="Project Name">
+            <div class="form-text validation-message text-danger"
+                *ngIf=" ProjectName.errors?.['required'] && (ProjectName.touched || ProjectName.dirty)">
+                Please Enter Project Name
+            </div>
+            <label for="name">Branch</label>
+            <input class="form__inset" type="text" formControlName="branch" placeholder="Branch" name="Branch">
+            <div class="form-text validation-message text-danger"
+                *ngIf=" Branch.errors?.['required'] && (Branch.touched || Branch.dirty)">
+                Please Enter Branch Name
+            </div>
+            <div *ngIf="showProgressBar" class="loading-overlay">
+                <div class="loader"></div>
+                <p class="loading-text">Just a moment! Creating Cluster...</p>
+              </div>
+        </form>
+        <div class="btns">
+            <button class="btn btn-cancel">Cancel</button>
+            <button class="btn btn-confirm" [disabled]="createForm.invalid"
+                (click)="onSubmit()">Submit</button>
+        </div>
+    </section>
+</div>
