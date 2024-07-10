@@ -6,7 +6,6 @@ export const environment = {
   production: false,
   api:{
     baseUrl:"https://cockpit.shahenvaz.tech/",
-    baseUrlAppDeployment:"https://apps.shahenvaz.tech/",
     
     routes:{
       registerUser:{endpoint:'jsonRegister', method:'POST'},
