@@ -55,8 +55,8 @@ export class RegisterService {
   private postRedirectlogEks = `${environment.api.baseUrl}${environment.api.routes.postRedirectlogEksCluster.endpoint}`
   private postRedirectGcp = `${environment.api.baseUrl}${environment.api.routes.postRedirectGcpCluster.endpoint}`;
   private postRedirectlogGcp = `${environment.api.baseUrl}${environment.api.routes.postRedirectlogGcpCluster.endpoint}`
-  private clonePrivateRepo = `${'https://apps.shahenvaz.tech/'}${environment.api.routes.clonePrivateRepo.endpoint}`
-  private clonePublicRepo = `${'https://apps.shahenvaz.tech/'}${environment.api.routes.clonePublicRepo.endpoint}`
+  private clonePrivateRepo = `${environment.api.baseUrlAppDeployment}${environment.api.routes.clonePrivateRepo.endpoint}`
+  private clonePublicRepo = `${environment.api.baseUrlAppDeployment}${environment.api.routes.clonePublicRepo.endpoint}`
 
   jobId: any;
   constructor(private httpClient: HttpClient) { }
