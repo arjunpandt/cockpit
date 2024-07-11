@@ -20,6 +20,8 @@ import { EksClusterredirectComponent } from './eksClusterredirect/eksClusterredi
 import { GkeClusterredirectComponent } from './gkeClusterredirect/gkeClusterredirect.component';
 import { AppDeploymentComponent } from './app-deployment/app-deployment.component';
 import { AppDeploymentAwsComponent } from './app-deployment-aws/app-deployment-aws.component';
+import { SelectServiceComponent } from './select-service/select-service.component';
+import { SelectClusterComponent } from './select-cluster/select-cluster.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -37,7 +39,11 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: HomeComponent
+        component: SelectServiceComponent
+      },
+      {
+        path:'cluster-management',
+        component:HomeComponent
       },
       {
         path: 'cloud-selection',
@@ -128,7 +134,11 @@ const routes: Routes = [
         children:[
           {
             path:'',
-            component:AppDeploymentComponent
+            component:AppDeploymentAwsComponent
+          },
+          {
+            path:'select-cloud',
+            component: SelectClusterComponent
           },
           {
             path:'aws',

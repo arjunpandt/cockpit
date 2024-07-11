@@ -38,6 +38,7 @@ export class AppDeploymentAwsComponent implements OnInit {
       this.service.clonePrivateRepositoty(data).subscribe((res)=>{
         console.log(res);
         this.toast.success(res.msg);
+        this.router.navigate(["/home/app-deployment/select-cloud"])
       },
       (error) => {
         this.toast.error(error.error.error)
@@ -52,6 +53,7 @@ export class AppDeploymentAwsComponent implements OnInit {
       this.service.clonePublicRepositoty(data).subscribe((res)=>{
         console.log(res);
         this.toast.success(res.msg)
+        this.router.navigate(["/home/app-deployment/select-cloud"])
       },
       (error) => {
         console.log(error.error);

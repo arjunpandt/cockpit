@@ -40,6 +40,8 @@ import { EksClusterredirectComponent } from './eksClusterredirect/eksClusterredi
 import { GkeClusterredirectComponent } from './gkeClusterredirect/gkeClusterredirect.component';
 import { AppDeploymentComponent } from './app-deployment/app-deployment.component';
 import { AppDeploymentAwsComponent } from './app-deployment-aws/app-deployment-aws.component';
+import { SelectServiceComponent } from './select-service/select-service.component';
+import { SelectClusterComponent } from './select-cluster/select-cluster.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -72,6 +74,8 @@ import { AppDeploymentAwsComponent } from './app-deployment-aws/app-deployment-a
     GkeClusterredirectComponent,
     AppDeploymentComponent,
     AppDeploymentAwsComponent,
+    SelectServiceComponent,
+    SelectClusterComponent,
   ],
   imports: [
     BrowserModule,

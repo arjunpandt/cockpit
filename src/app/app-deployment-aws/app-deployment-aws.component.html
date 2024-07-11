@@ -3,7 +3,7 @@
         <h1>Application Deployment</h1>
     </header>
     <section class="input-content">
-        <h2>Application Deployment</h2>
+        <h2>Step 1. Project Creation</h2>
         <form class="form" [formGroup]="createForm" (ngSubmit)="onSubmit()">
             <label for="name">GitHub URL</label>
             <input class="form__inset" type="text" formControlName="githuburl" placeholder="GitHub URL"
@@ -25,15 +25,15 @@
                 *ngIf="RepoType.errors?.['required'] && (RepoType.touched || RepoType.dirty)">
                 Please select Account Name
             </div>
-            
-                <label *ngIf="this.createForm.value['repo_type']==='private_repo'" for="name">Private Token</label>
-                <input *ngIf="this.createForm.value['repo_type']==='private_repo'" class="form__inset" type="password" formControlName="private_token" placeholder="Private Token"
-                    name="Private Token" >
-                <div class="form-text validation-message text-danger"
-                    *ngIf=" PrivateToken.errors?.['required'] && (PrivateToken.touched || PrivateToken.dirty) && this.createForm.value['repo_type']==='private_repo'">
-                    Please Enter Private Token
-                </div>
-            
+
+            <label *ngIf="this.createForm.value['repo_type']==='private_repo'" for="name">Private Token</label>
+            <input *ngIf="this.createForm.value['repo_type']==='private_repo'" class="form__inset" type="password"
+                formControlName="private_token" placeholder="Private Token" name="Private Token">
+            <div class="form-text validation-message text-danger"
+                *ngIf=" PrivateToken.errors?.['required'] && (PrivateToken.touched || PrivateToken.dirty) && this.createForm.value['repo_type']==='private_repo'">
+                Please Enter Private Token
+            </div>
+
             <label for="name">Project Name</label>
             <input class="form__inset" type="text" formControlName="project_name" placeholder="Project Name"
                 name="Project Name">
@@ -50,12 +50,11 @@
             <div *ngIf="showProgressBar" class="loading-overlay">
                 <div class="loader"></div>
                 <p class="loading-text">Just a moment! Creating Cluster...</p>
-              </div>
+            </div>
         </form>
         <div class="btns">
             <button class="btn btn-cancel" (click)="onCancel()">Cancel</button>
-            <button class="btn btn-confirm" [disabled]="createForm.invalid"
-                (click)="onSubmit()">Submit</button>
+            <button class="btn btn-confirm" [disabled]="createForm.invalid" (click)="onSubmit()">NEXT</button>
         </div>
     </section>
 </div>
