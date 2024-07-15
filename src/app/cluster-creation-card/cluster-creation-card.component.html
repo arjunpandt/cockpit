@@ -2,7 +2,7 @@
 <div *ngIf="!showCard" class="card">
   <span class="tag">{{ cardTitle }}</span>
   <div *ngFor="let item of getObjectKeys(sampleData)" class="card-item">
-    <strong>{{ item === 'job_ids'? 'Job Ids' : item }}:</strong>
+    <strong>{{ item === 'job_ids'? 'Cluster Name' : item }}:</strong>
     <ng-container *ngIf="isArrayWithData(item)">
       <!-- Display a dropdown for arrays with data -->
       <select class="dropdown" [(ngModel)]="selectedArrayValue" (change)="createObject()">

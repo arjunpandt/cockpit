@@ -14,7 +14,8 @@ export class SelectServiceComponent implements OnInit {
   }
 
   onClickAppDeployment=()=>{
-    this.router.navigate(["/home/app-deployment"]);
+    // this.router.navigate(["/home/app-deployment"]);
+    this.router.navigate(["/home/app-deployment/select-cloud"])
   }
   onClickClusterManagement=()=>{
     console.log("test");

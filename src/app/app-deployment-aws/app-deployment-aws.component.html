@@ -3,18 +3,25 @@
         <h1>Application Deployment</h1>
     </header>
     <section class="input-content">
-        <h2>Step 1. Project Creation</h2>
+        <h2>Step 2. Project Creation</h2>
         <form class="form" [formGroup]="createForm" (ngSubmit)="onSubmit()">
-            <label for="name">GitHub URL</label>
+            <label for="ProjectName">Project Name</label>
+            <input class="form__inset" type="text" formControlName="project_name" placeholder="Project Name"
+                name="ProjectName">
+            <div class="form-text validation-message text-danger"
+                *ngIf=" ProjectName.errors?.['required'] && (ProjectName.touched || ProjectName.dirty)">
+                Please Enter Project Name
+            </div>
+            <label for="githuburl">GitHub URL</label>
             <input class="form__inset" type="text" formControlName="githuburl" placeholder="GitHub URL"
-                name="GitHub URL">
+                name="githuburl">
             <div class="form-text validation-message text-danger"
                 *ngIf=" GithubURL.errors?.['required'] && (GithubURL.touched || GithubURL.dirty)">
                 Please Enter GitHub URL
             </div>
-            <label for="name">Repository Type</label>
+            <label for="repotype">Repository Type</label>
             <div class="tooltip-container">
-                <select class="form__inset" formControlName="repo_type">
+                <select class="form__inset" formControlName="repo_type" name="repotype">
                     <option value="" disabled selected>Select Repository Type</option>
                     <option value="private_repo">Private Repo</option>
                     <option value="public_repo">Public Repo</option>
@@ -26,22 +33,16 @@
                 Please select Account Name
             </div>
 
-            <label *ngIf="this.createForm.value['repo_type']==='private_repo'" for="name">Private Token</label>
+            <label *ngIf="this.createForm.value['repo_type']==='private_repo'" for="PrivateToken">Private Token</label>
             <input *ngIf="this.createForm.value['repo_type']==='private_repo'" class="form__inset" type="password"
-                formControlName="private_token" placeholder="Private Token" name="Private Token">
+                formControlName="private_token" placeholder="Private Token" name="PrivateToken">
             <div class="form-text validation-message text-danger"
                 *ngIf=" PrivateToken.errors?.['required'] && (PrivateToken.touched || PrivateToken.dirty) && this.createForm.value['repo_type']==='private_repo'">
                 Please Enter Private Token
             </div>
 
-            <label for="name">Project Name</label>
-            <input class="form__inset" type="text" formControlName="project_name" placeholder="Project Name"
-                name="Project Name">
-            <div class="form-text validation-message text-danger"
-                *ngIf=" ProjectName.errors?.['required'] && (ProjectName.touched || ProjectName.dirty)">
-                Please Enter Project Name
-            </div>
-            <label for="name">Branch</label>
+            
+            <label for="Branch">Branch</label>
             <input class="form__inset" type="text" formControlName="branch" placeholder="Branch" name="Branch">
             <div class="form-text validation-message text-danger"
                 *ngIf=" Branch.errors?.['required'] && (Branch.touched || Branch.dirty)">
@@ -54,7 +55,8 @@
         </form>
         <div class="btns">
             <button class="btn btn-cancel" (click)="onCancel()">Cancel</button>
-            <button class="btn btn-confirm" [disabled]="createForm.invalid" (click)="onSubmit()">NEXT</button>
+            <button class="btn btn-confirm"  (click)="onSubmit()">NEXT</button>
+            <!-- [disabled]="createForm.invalid" -->
         </div>
     </section>
 </div>

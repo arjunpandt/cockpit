@@ -1,0 +1,109 @@
+
+
+<div id="wrap" class="input " [ngClass]="{'dynamicHeight':!clusterForm,'dynamicHeightFull':clusterForm}">
+    <header class="input-header">
+        <h1>Select EKS Cluster</h1>
+    </header>
+    <section class="input-content">
+        <h2>Step 1. Select Cluster<span>EKS</span></h2>
+        <label for="name" style="font-size: 30px;">Select Cluster</label>            
+            <div class="tooltip-container">
+                <select class="form__inset" (change)="onAccountChange()">
+                    <option value="" disabled selected>Select Cluster </option>
+                    <option *ngFor="let cluster of selectCluster" [value]="cluster">{{ cluster }}</option>
+                </select>
+                <Button type="button" class="btn btn-primary" style="margin-left: 10px; margin-bottom: 3px; height: 54px; font-size: large;" (click)="addCluster()">Add Cluster </Button>
+            </div>
+        <form *ngIf="clusterForm" class="form" [formGroup]="createForm" (ngSubmit)="onNextEks()">
+            <label for="name">EKS Name</label>
+            <input class="form__inset" type="text" formControlName="eks_name" placeholder="EKS Name" name="EKS Name">
+            <div class="form-text validation-message text-danger" *ngIf=" ClusterName.errors?.['required'] && (ClusterName.touched || ClusterName.dirty)">
+                Please enter Cluster name
+            </div>
+
+            <label for="name">Account Name</label>            
+            <div class="tooltip-container">
+                <select class="form__inset" formControlName="account_name" (change)="onAccountChange()">
+                    <option value="" disabled selected>Select Account Name</option>
+                    <option *ngFor="let acc of accountNames" [value]="acc">{{ acc }}</option>
+                </select>
+                <mat-icon matTooltip="You need to create an account first" class="info-icon">info</mat-icon>
+            </div>
+            <div class="form-text validation-message text-danger" *ngIf="AccountName.errors?.['required'] && (AccountName.touched || AccountName.dirty)">
+              Please select Account Name
+            </div>
+
+            <label for="name">Region</label>
+            <select class="form__inset" name="Region" formControlName="region" placeholder="Region">
+                <option value="us-east-1">US East-1</option>
+                <option value=" us-east-2"> US East-2</option>
+                <option value="us-west-1">US West-1</option>
+                <option value="us-west-2">US West-2</option>
+            </select>
+            <div class="form-text validation-message text-danger" *ngIf=" Region.errors?.['required'] && (Region.touched || Region.dirty)">
+                Please enter Region
+            </div>
+
+            <label for="name">Instance Type</label>
+            <select class="form__inset" name="Instance Type" formControlName="instance_type" placeholder="Instance Type">
+                <option value="t2.micro">t2.micro</option>
+                <option value="t3.medium">t3.medium</option>
+                <option value="m5.large">m5.large</option>
+                <option value="r5.large">r5.large</option>
+                <option value="i3.large">i3.large</option>
+            </select>
+            <div class="form-text validation-message text-danger" *ngIf=" InstanceType.errors?.['required'] && (InstanceType.touched || InstanceType.dirty)">
+                Please enter Instance Type
+            </div>
+
+            <label for="name">EKS Version</label>
+            <select class="form__inset" name="EKS Version" formControlName="eks_version" placeholder="EKS Version">
+                <option value="1.24">1.24</option>
+                <option value="1.25">1.25</option>
+                <option value="1.27">1.27</option>
+                <option value="1.26">1.26</option>
+                <option value="1.28">1.28</option>
+            </select>
+            <div class="form-text validation-message text-danger" *ngIf=" EksVersion.errors?.['required'] && (EksVersion.touched || EksVersion.dirty)">
+                Please enter EKS Version
+            </div>
+
+            <label for="name">Desired Size</label>
+            <input class="form__inset" type="text" formControlName="desired_size" placeholder="Desired Size" name="Desired Size">
+            <div class="form-text validation-message text-danger" *ngIf=" DesiredSize.errors?.['required'] && (DesiredSize.touched || DesiredSize.dirty)">
+                Please enter Desired Size
+            </div>
+
+            <label for="name">Max Size</label>
+            <input class="form__inset" type="text" formControlName="max_size" placeholder="Max Size" name="Max Size">
+            <div class="form-text validation-message text-danger" *ngIf=" MaxSize.errors?.['required'] && (MaxSize.touched || MaxSize.dirty)">
+                Please enter Max Size
+            </div>
+
+            <label for="name">Min Size</label>
+            <input class="form__inset" type="text" formControlName="min_size" placeholder="Min Size" name="Min Size">
+            <div class="form-text validation-message text-danger" *ngIf=" MinSize.errors?.['required'] && (MinSize.touched || MinSize.dirty)">
+                Please enter Min Size
+            </div>
+
+            <label for="name">Cluster Type</label>
+            <select class="form__inset" formControlName="cluster_type" name="cluster_type">
+                <option value="Public">Public</option>
+                <option value="Private">Private</option>
+            </select>
+            <div class="form-text validation-message text-danger" *ngIf=" ClusterType.errors?.['required'] && (ClusterType.touched || ClusterType.dirty)">
+                Please enter Cluster Type
+            </div>
+
+              <div *ngIf="showProgressBar" class="loading-overlay">
+                <div class="loader"></div>
+                <p class="loading-text">Just a moment! Creating Cluster...</p>
+              </div>
+        </form>
+        <div class="btns">
+            <button class="btn btn-cancel" (click)="onCancel()">Cancel</button>
+            <button  class="btn btn-confirm"  routerLink="gke-clusterredirect"  (click)="onNextEks()">Next</button>
+            <!-- [disabled]="createForm.invalid" -->
+        </div>
+    </section>
+</div>

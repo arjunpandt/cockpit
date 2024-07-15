@@ -1,33 +1,43 @@
-<div class="header-blue">
-    <div class="container hero">
-        <div class="row device">
-            <h1>Select Cloud </h1>
+<div id="wrap" class="input">
+    <header class="input-header">
+        <h1>Application Deployment</h1>
+    </header>
+    <section class="input-content">
+        <h2>Step 3.  Deploy Project</h2>
+        <form class="form" [formGroup]="createForm" (ngSubmit)="onSubmit()">
 
+            <label for="username">Username</label>
+            <input class="form__inset" type="text" formControlName="githuburl" placeholder="Username"
+                name="username">
+            <div class="form-text validation-message text-danger"
+                *ngIf=" UserName.errors?.['required'] && (UserName.touched || UserName.dirty)">
+                Please Enter Username
+            </div>
+
+            <label for="name">Project Name</label>
+            <input class="form__inset" type="text" formControlName="project_name" placeholder="Project Name"
+                name="Project Name">
+            <div class="form-text validation-message text-danger"
+                *ngIf=" ProjectName.errors?.['required'] && (ProjectName.touched || ProjectName.dirty)">
+                Please Enter Project Name
+            </div>
+
+            <label for="appname">App Name</label>
+            <input class="form__inset" type="text" formControlName="branch" placeholder="App Name" name="appname">
+            <div class="form-text validation-message text-danger"
+                *ngIf=" AppName.errors?.['required'] && (AppName.touched || AppName.dirty)">
+                Please Enter Branch Name
+            </div>
+
+            <div *ngIf="showProgressBar" class="loading-overlay">
+                <div class="loader"></div>
+                <p class="loading-text">Just a moment! Creating Cluster...</p>
+            </div>
+
+        </form>
+        <div class="btns">
+            <button class="btn btn-cancel" (click)="onCancel()">Cancel</button>
+            <button class="btn btn-confirm" [disabled]="createForm.invalid" (click)="onSubmit()">Submit</button>
         </div>
-        <div class="cloud-card">
-            <div class="card device">
-                <div class="box" style="background-image: url(../../assets/aws.png);" (click)="onClickAws()">
-                </div>
-                <div class="card-label">
-                    <h3 style="color: black; text-align: center;">AWS</h3>
-                </div>
-            </div>
-
-            <div class="card device">
-                <div class="box" style="background-image: url(./../assets/Azure.png);" (click)="onClickAzure()">
-                </div>
-                <div class="card-label">
-                    <h3 style="color: black; text-align: center;">Azure</h3>
-                </div>
-            </div>
-
-            <div class="card device">
-                <div class="box" style="background-image: url(./../assets/gcp.jpg);" (click)="onClickGcp()">
-                </div>
-                <div class="card-label">
-                    <h3 style="color: black; text-align: center;">GCP</h3>
-                </div>
-            </div>
-        </div>
-    </div>
+    </section>
 </div>
