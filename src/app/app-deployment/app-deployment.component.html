@@ -6,24 +6,24 @@
         <h2>Step 3.  Deploy Project</h2>
         <form class="form" [formGroup]="createForm" (ngSubmit)="onSubmit()">
 
-            <label for="username">Username</label>
+            <!-- <label for="username">Username</label>
             <input class="form__inset" type="text" formControlName="githuburl" placeholder="Username"
                 name="username">
             <div class="form-text validation-message text-danger"
                 *ngIf=" UserName.errors?.['required'] && (UserName.touched || UserName.dirty)">
                 Please Enter Username
-            </div>
+            </div> -->
 
-            <label for="name">Project Name</label>
+            <!-- <label for="name">Project Name</label>
             <input class="form__inset" type="text" formControlName="project_name" placeholder="Project Name"
                 name="Project Name">
             <div class="form-text validation-message text-danger"
                 *ngIf=" ProjectName.errors?.['required'] && (ProjectName.touched || ProjectName.dirty)">
                 Please Enter Project Name
-            </div>
+            </div> -->
 
             <label for="appname">App Name</label>
-            <input class="form__inset" type="text" formControlName="branch" placeholder="App Name" name="appname">
+            <input class="form__inset" type="text" formControlName="app_name" placeholder="App Name" name="appname">
             <div class="form-text validation-message text-danger"
                 *ngIf=" AppName.errors?.['required'] && (AppName.touched || AppName.dirty)">
                 Please Enter Branch Name

@@ -57,6 +57,7 @@ export class RegisterService {
   private postRedirectGcp = `${environment.api.baseUrl}${environment.api.routes.postRedirectGcpCluster.endpoint}`;
   private postRedirectlogGcp = `${environment.api.baseUrl}${environment.api.routes.postRedirectlogGcpCluster.endpoint}`
   private clonePrivateRepo = `${environment.api.baseUrlAppDeployment}${environment.api.routes.clonePrivateRepo.endpoint}`
+  private createDeploy = `${environment.api.baseUrlAppDeployment}${environment.api.routes.createDeploy.endpoint}`
   private clonePublicRepo = `${environment.api.baseUrlAppDeployment}${environment.api.routes.clonePublicRepo.endpoint}`
 
   jobId: any;
@@ -264,6 +265,9 @@ export class RegisterService {
   }
   clonePrivateRepositoty(body: any): Observable<any> {
     return this.httpClient.post(this.clonePrivateRepo, body);
+  }
+  crateDeployment(body: any): Observable<any> {
+    return this.httpClient.post(this.createDeploy, body);
   }
   clonePublicRepositoty(body: any): Observable<any> {
     return this.httpClient.post(this.clonePublicRepo, body);

@@ -124,6 +124,8 @@ export class AwsComponent implements OnInit {
 
   onNextEks(){
     this.router.navigate(["/home/app-deployment"])
+    localStorage.setItem('account_name',this.selectedAccount)
+    localStorage.setItem('cluster_name',this.selectedCluster)
   }
 
   onSaveCluster(){
@@ -132,8 +134,6 @@ export class AwsComponent implements OnInit {
     this.showProgressBar = true;
     this.service.postEksCluster(this.createForm.value).subscribe((res)=>{
       this.createForm.reset();
-
-      console.log(res);
       localStorage.setItem('account_name',res.account_name)
       localStorage.setItem('eks_name',res.eks_name)
       localStorage.setItem('region_code',res.region_code)
