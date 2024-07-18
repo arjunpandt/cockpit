@@ -12,6 +12,7 @@ import {Location} from '@angular/common';
 })
 export class AppDeploymentComponent implements OnInit {
   showProgressBar: boolean = false;
+  deployedURl:string='';
   createForm= new FormGroup({
     app_name: new FormControl('',[Validators.required]),
   });
@@ -33,9 +34,8 @@ export class AppDeploymentComponent implements OnInit {
 
     this.service.crateDeployment(data).subscribe((res)=>{
       this.showProgressBar = false;
-      console.log(res);
-      this.toast.success("APllication Deployed Succesfully!, Here is the URL", res.endpoint);
-      window.open(res.endpoint,'_blank')
+      this.deployedURl=res.endpoint
+      this.toast.success("Apllication Deployed Succesfully!, Here is the URL");
     },
     (error) => {
       this.showProgressBar = false;

@@ -26,27 +26,22 @@
             <input class="form__inset" type="text" formControlName="app_name" placeholder="App Name" name="appname">
             <div class="form-text validation-message text-danger"
                 *ngIf=" AppName.errors?.['required'] && (AppName.touched || AppName.dirty)">
-                Please Enter Branch Name
+                Please Enter APP Name
             </div>
+            <!-- <div *ngIf="deployedURl!==''">Apllication Deployed Succesfully! Here is the URL <a [href]="'http://'+'deployedURl'" target="_blank" [innerHTML]="deployedURl"></a></div> -->
 
             <div *ngIf="showProgressBar" class="loading-overlay">
                 <div class="loader"></div>
                 <p class="loading-text">Just a moment! Creating your Application...</p>
             </div>
-
-            <!-- <div class="loading-overlay">
-                <div class="card">
-                    <div class="card-heading">
-                    <span class="tag">Testing</span>
-                    <button class="add-button-style" >Check Application</button>
-                  </div>
-                </div>
-            </div> -->
-
         </form>
         <div class="btns">
             <button class="btn btn-cancel" (click)="onCancel()">Cancel</button>
             <button class="btn btn-confirm" [disabled]="createForm.invalid" (click)="onSubmit()">Submit</button>
         </div>
+        <div style="margin-top: 40px;" *ngIf="deployedURl!==''">Apllication Deployed Succesfully! Here is the URL <a [href]="'http://'+'deployedURl'" target="_blank" [innerHTML]="deployedURl"></a></div>
+
+
+
     </section>
 </div>
