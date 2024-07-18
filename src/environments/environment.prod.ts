@@ -54,7 +54,8 @@ export const environment = {
       getAws: {endpoint:'json_get_credential_aws', method:'POST'},
       getGcp: {endpoint:'json_get_credential_gcp', method:'POST'},
       clonePrivateRepo: {endpoint:'clone_private_repo', method:'POST'},
-      clonePublicRepo:{endpoint:'clone_public_repo',method:'POST'}
+      clonePublicRepo:{endpoint:'clone_public_repo',method:'POST'},
+      getEksClusters:{endpoint:'/json-get-eks', method:'GET'}
     }
   }
 };
