@@ -26,41 +26,40 @@ export class AppDeploymentAwsComponent implements OnInit {
 
   onSubmit(){
     // this.router.navigate(["/home/app-deployment/select-cloud"])
-    // if(this.createForm.value["repo_type"]==="private_repo"){
-    //   const data= {
-    //     "githuburl": this.createForm.value["githuburl"]?.replace(/https?:\/\//, ''),
-    //     "private_token": this.createForm.value["private_token"],
-    //     "project_name": this.createForm.value["project_name"],
-    //     "branch": this.createForm.value["branch"]
-    //   }
-    //   console.log("private repo");
-    //   debugger;
-    //   this.service.clonePrivateRepositoty(data).subscribe((res)=>{
-    //     console.log(res);
-    //     this.toast.success(res.msg);
-    //     this.router.navigate(["/home/app-deployment/select-cloud"])
-    //   },
-    //   (error) => {
-    //     this.toast.error(error.error.error)
-    //   })
-    // } else{
-    //   const data= {
-    //     "githuburl": this.createForm.value["githuburl"]?.replace(/https?:\/\//, ''),
-    //     "project_name": this.createForm.value["project_name"],
-    //     "branch": this.createForm.value["branch"]
-    //   }
-    //   console.log("public repo");
-    //   this.service.clonePublicRepositoty(data).subscribe((res)=>{
-    //     console.log(res);
-    //     this.toast.success(res.msg)
-    //     this.router.navigate(["/home/app-deployment/select-cloud"])
-    //   },
-    //   (error) => {
-    //     console.log(error.error);
-        
-    //     this.toast.error(error.error.error)
-    //   })
-    // }
+    if(this.createForm.value["repo_type"]==="private_repo"){
+      const data= {
+        "githuburl": this.createForm.value["githuburl"]?.replace(/https?:\/\//, ''),
+        "private_token": this.createForm.value["private_token"],
+        "project_name": this.createForm.value["project_name"],
+        "branch": this.createForm.value["branch"]
+      }
+      console.log("private repo");
+      debugger;
+      this.service.clonePrivateRepositoty(data).subscribe((res)=>{
+        console.log(res);
+        this.toast.success(res.msg);
+        this.router.navigate(["/home/app-deployment/select-cloud"])
+      },
+      (error) => {
+        this.toast.error(error.error.error)
+      })
+    } else{
+      const data= {
+        "githuburl": this.createForm.value["githuburl"]?.replace(/https?:\/\//, ''),
+        "project_name": this.createForm.value["project_name"],
+        "branch": this.createForm.value["branch"]
+      }
+      console.log("public repo");
+      this.service.clonePublicRepositoty(data).subscribe((res)=>{
+        console.log(res);
+        this.toast.success(res.msg)
+        this.router.navigate(["/home/app-deployment/select-cloud"])
+      },
+      (error) => {
+        console.log(error.error);
+        this.toast.error(error.error.error)
+      })
+    }
   }
 
   onCancel(){

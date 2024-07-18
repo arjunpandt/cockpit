@@ -49,6 +49,7 @@ export class RegisterService {
   private getAzures = `${environment.api.baseUrl}${environment.api.routes.getAzure.endpoint}`;
   private getAwsCred = `${environment.api.baseUrl}${environment.api.routes.getAws.endpoint}`;
   private getGcpCred = `${environment.api.baseUrl}${environment.api.routes.getGcp.endpoint}`;
+  private getEksCluster= `${environment.api.baseUrl}${environment.api.routes.getEksClusters.endpoint}`;
   private postRedirectAks = `${environment.api.baseUrl}${environment.api.routes.postRedirectAksCluster.endpoint}`;
   private postRedirectlogAks = `${environment.api.baseUrl}${environment.api.routes.postRedirectlogAksCluster.endpoint}`;
   private postRedirectEks = `${environment.api.baseUrl}${environment.api.routes.postRedirectEksCluster.endpoint}`;
@@ -131,6 +132,10 @@ export class RegisterService {
 
   postAwsCreationStatus(gcpBody: any): Observable<any> {
     return this.httpClient.post(this.postAwsStatus, gcpBody);
+  }
+
+  getEksClusters(body: any):  Observable<any>{
+    return this.httpClient.post(this.getEksCluster, body)
   }
 
   postAzureCreationStatus(gcpBody: any): Observable<any> {

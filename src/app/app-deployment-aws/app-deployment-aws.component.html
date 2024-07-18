@@ -55,8 +55,8 @@
         </form>
         <div class="btns">
             <button class="btn btn-cancel" (click)="onCancel()">Cancel</button>
-            <button class="btn btn-confirm"  (click)="onSubmit()">NEXT</button>
-            <!-- [disabled]="createForm.invalid" -->
+            <button class="btn btn-confirm" [disabled]="createForm.invalid" (click)="onSubmit()">NEXT</button>
+            
         </div>
     </section>
 </div>

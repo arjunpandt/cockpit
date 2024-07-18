@@ -11,6 +11,8 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class AwsComponent implements OnInit {
   clusterForm:boolean= false;
+  selectedCluster:string='';
+  selectedAccount:string='';
 
   createForm= new FormGroup({
     eks_name: new FormControl('',[Validators.required]),
@@ -41,22 +43,22 @@ export class AwsComponent implements OnInit {
 
   ngOnInit(): void {
     this.username = localStorage.getItem("username") ?? '';
-    this.onAccountChange();
+    this.fetchAccounts();
     this.awsBody={
       username: this.username
     }
-    this.service.postAwsCreationStatus(this.awsBody).subscribe((res)=>{
-      console.log(res.job_ids);
-      this.selectCluster=res.job_ids
+    // this.service.postAwsCreationStatus(this.awsBody).subscribe((res)=>{
+    //   console.log(res.job_ids);
+    //   this.selectCluster=res.job_ids
       
-    })
+    // })
   }
 
   onCancel(){
     this.router.navigate(["/home/app-deployment/select-cloud"]);
   }
 
-  onAccountChange() {
+  fetchAccounts() {
     this.postUsername = {
       username: this.username
     };
@@ -68,6 +70,31 @@ export class AwsComponent implements OnInit {
         this.toast.error(error.error.message)
       }
     );
+  }
+
+  onAccountChange(selectedAccount:string){
+    console.log(selectedAccount);
+    this.createForm.value["account_name"]=selectedAccount;
+    this.createForm.patchValue({account_name:selectedAccount})
+    const body ={
+      username: this.username,
+      account_name:selectedAccount
+    }
+    this.service.getEksClusters(body).subscribe(
+      (res)=>{
+        console.log(res);
+        this.selectCluster = res.clusters
+        
+      },
+      (error)=>{
+        console.log(error);
+        
+      }
+    )
+  }
+
+  onClusterChange(){
+    
   }
 
   // onClick() {
@@ -88,24 +115,35 @@ export class AwsComponent implements OnInit {
     
   }
 
+  onAddAccount(){
+    const newTab = this.router.createUrlTree(['home/cloud-selection/aws'], { queryParams: { action: 'Add' } }).toString();
+    window.open(newTab,'_blank')
+    console.log(newTab);
+    
+  }
+
   onNextEks(){
+    if(!this.clusterForm){
+      this.router.navigate(["/home/app-deployment"]) 
+      return;
+    }
+  }
+
+  onSaveCluster(){
     localStorage.removeItem('eks_job_id')
-    this.router.navigate(["/home/app-deployment"]) 
+    // this.router.navigate(["/home/app-deployment"]) 
     this.showProgressBar = true;
     this.service.postEksCluster(this.createForm.value).subscribe((res)=>{
       this.createForm.reset();
-      
-      // setTimeout(()=>{
-      //   this.showProgressBar = false;
-      //   this.toast.success(res.message);
-      //   this.router.navigate(["/home/cloud-selection/aws/aws2/redirect"]);
-      // },300000)
+
       console.log(res);
       localStorage.setItem('account_name',res.account_name)
       localStorage.setItem('eks_name',res.eks_name)
       localStorage.setItem('region_code',res.region_code)
       localStorage.setItem('key_vault',res.key_vault)
       this.checkClusterStatus(res);
+      // this.showProgressBar = false;
+      // this.toast.success(res.message)
     }, (error)=>{
       this.showProgressBar = false;
       this.toast.error(error.error.message)
@@ -113,52 +151,56 @@ export class AwsComponent implements OnInit {
   }
 
   checkClusterStatus(detials:any){
-      // const data = {
-      //   account_name: localStorage.getItem('account_name'),
-      //   eks_name: localStorage.getItem('eks_name'),
-      //   region_code: localStorage.getItem('region_code'),
-      //   key_vault: localStorage.getItem('key_vault')
-      // };
+    
       const data = {
         account_name: detials.account_name,
         eks_name: detials.eks_name,
         region_code: detials.region_code,
         key_vault: detials.key_vault
       };
+
       const checkStatus = setInterval(()=>{
         this.service.postAksClusterStatus(data).subscribe((res)=>{
           console.log('Data sent successfully', res);
           if(res.created==="true"){
+            this.showProgressBar = false;
+            this.toast.success(res.message)
+            this.router.navigate(["/home/app-deployment"]) 
             clearInterval(checkStatus)
+            // clearInterval(recentJobCheck)
           }
         },(error)=>{
+          clearInterval(checkStatus)
           console.log(error.error.message);
+          this.toast.error(error.error.message)
+          this.showProgressBar = false;
         })
-
       },30000)
 
-      const dataforRecentJobCheck = {
-        account_name:detials.account_name,
-        cluster_name:detials.eks_name,
-        username:this.username
-      }
-      const recentJobCheck = setInterval(()=>{
-        this.service.postRedirectEksCluster(dataforRecentJobCheck).subscribe(
-          (res) => {
+      // const dataforRecentJobCheck = {
+      //   account_name:detials.account_name,
+      //   cluster_name:detials.eks_name,
+      //   username:this.username
+      // }
+      // const recentJobCheck = setInterval(()=>{
+      //   this.service.postRedirectEksCluster(dataforRecentJobCheck).subscribe(
+      //     (res) => {
 
-            if(res.id==="true"){
-              this.job_id = res.most_recent_job_id 
-              localStorage.setItem('eks_job_id',res.most_recent_job_id)
-              clearInterval(recentJobCheck)
-            } 
-          },(error) => {
-            this.toast.error(error.error.message);
-          }
-        );
-      },3000)
+      //       if(res.id==="true"){
+      //         this.job_id = res.most_recent_job_id 
+      //         localStorage.setItem('eks_job_id',res.most_recent_job_id)
+      //         clearInterval(recentJobCheck)
+      //       } 
+      //     },(error) => {
+      //       this.toast.error(error.error.message);
+      //     }
+      //   );
+      // },3000)
 
       
   }
+
+  
 
   get ClusterName():FormControl{
     return this.createForm.get("eks_name") as FormControl;
