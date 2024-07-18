@@ -26,6 +26,7 @@ export class AppDeploymentAwsComponent implements OnInit {
 
   onSubmit(){
     // this.router.navigate(["/home/app-deployment/select-cloud"])
+    localStorage.setItem('project_name',this.createForm.value["project_name"]?? '')
     if(this.createForm.value["repo_type"]==="private_repo"){
       const data= {
         "githuburl": this.createForm.value["githuburl"]?.replace(/https?:\/\//, ''),

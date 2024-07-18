@@ -22,19 +22,23 @@ export class AppDeploymentComponent implements OnInit {
   }
 
   onSubmit(){
-  
+    this.showProgressBar = true;
     const data= {
       "username": localStorage.getItem("username") ?? '',
       "cluster_name": localStorage.getItem("cluster_name") ?? '',
       "account_name": localStorage.getItem("account_name") ?? '',
-      "app_name": this.createForm.value["app_name"]
+      "app_name": this.createForm.value["app_name"],
+      "project_name":localStorage.getItem("project_name")
     }
 
     this.service.crateDeployment(data).subscribe((res)=>{
+      this.showProgressBar = false;
       console.log(res);
       this.toast.success(res.msg);
+      window.open(res.endpoint,'_blank')
     },
     (error) => {
+      this.showProgressBar = false;
       this.toast.error(error.error.error)
     })
 
