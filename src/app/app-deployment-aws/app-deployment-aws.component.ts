@@ -38,7 +38,7 @@ export class AppDeploymentAwsComponent implements OnInit {
       this.service.clonePrivateRepositoty(data).subscribe((res)=>{
         console.log(res);
         this.toast.success(res.msg);
-        this.router.navigate(["/home/app-deployment/select-cloud"])
+        this.router.navigate(["/home/app-deployment/deploy"])
       },
       (error) => {
         this.toast.error(error.error.error)
@@ -53,7 +53,7 @@ export class AppDeploymentAwsComponent implements OnInit {
       this.service.clonePublicRepositoty(data).subscribe((res)=>{
         console.log(res);
         this.toast.success(res.msg)
-        this.router.navigate(["/home/app-deployment/select-cloud"])
+        this.router.navigate(["/home/app-deployment/deploy"])
       },
       (error) => {
         console.log(error.error);
@@ -64,7 +64,7 @@ export class AppDeploymentAwsComponent implements OnInit {
 
   onCancel(){
     console.log("test");
-    this.router.navigate(["/home"]);
+    this.router.navigate(["/home/app-deployment/aws"]);
   }
 
   get GithubURL():FormControl{

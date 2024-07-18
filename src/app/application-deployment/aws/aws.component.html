@@ -127,7 +127,7 @@
         </form>
         <div class="btns">
             <button class="btn btn-cancel" (click)="onCancel()">Cancel</button>
-            <button class="btn btn-danger" [disabled]="selectedCluster===''" (click)="onNextEks()">Next</button>
+            <button class="btn btn-danger" [disabled]="(selectedCluster==='')" (click)="onNextEks()">Next</button>
             <button *ngIf="clusterForm" class="btn btn-primary"  [disabled]="createForm.invalid" (click)="onSaveCluster()">Save</button>
         </div>
     </section>

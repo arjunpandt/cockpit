@@ -123,10 +123,7 @@ export class AwsComponent implements OnInit {
   }
 
   onNextEks(){
-    if(!this.clusterForm){
-      this.router.navigate(["/home/app-deployment"]) 
-      return;
-    }
+    this.router.navigate(["/home/app-deployment"])
   }
 
   onSaveCluster(){
