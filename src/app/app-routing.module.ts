@@ -23,6 +23,7 @@ import { AppDeploymentAwsComponent } from './app-deployment-aws/app-deployment-a
 import { SelectServiceComponent } from './select-service/select-service.component';
 import { SelectClusterComponent } from './select-cluster/select-cluster.component';
 import { AwsComponent } from './application-deployment/aws/aws.component';
+import { DeployedComponent } from './deployed/deployed.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -152,6 +153,10 @@ const routes: Routes = [
           {
             path:'azure',
             component:AppDeploymentAwsComponent
+          },
+          {
+            path:'app-deployed',
+            component:DeployedComponent
           },
           {
             path:'google',

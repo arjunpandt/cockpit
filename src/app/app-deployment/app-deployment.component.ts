@@ -34,7 +34,7 @@ export class AppDeploymentComponent implements OnInit {
     this.service.crateDeployment(data).subscribe((res)=>{
       this.showProgressBar = false;
       console.log(res);
-      this.toast.success(res.msg);
+      this.toast.success("APllication Deployed Succesfully!, Here is the URL", res.endpoint);
       window.open(res.endpoint,'_blank')
     },
     (error) => {
