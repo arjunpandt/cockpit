@@ -33,7 +33,6 @@ export class AppDeploymentComponent implements OnInit {
     this.service.crateDeployment(data).subscribe((res)=>{
       console.log(res);
       this.toast.success(res.msg);
-      this.router.navigate(["/home/app-deployment/select-cloud"])
     },
     (error) => {
       this.toast.error(error.error.error)
