@@ -17,7 +17,7 @@ export class SelectClusterComponent implements OnInit {
     this.currentRoute= this.router.url;
   }
   onClickAws() {
-    this.router.navigate(["/home/app-deployment/aws"]);
+    this.router.navigate(["/home/management/aws"]);
   }
 
   onClickAzure() {

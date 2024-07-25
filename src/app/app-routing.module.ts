@@ -24,6 +24,7 @@ import { SelectServiceComponent } from './select-service/select-service.componen
 import { SelectClusterComponent } from './select-cluster/select-cluster.component';
 import { AwsComponent } from './application-deployment/aws/aws.component';
 import { DeployedComponent } from './deployed/deployed.component';
+import { AppManagementComponent } from './app-management/app-management.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -131,7 +132,16 @@ const routes: Routes = [
             ]
           },
         ]
-      },{
+      },
+      {
+        path:"management/aws",
+        component:AppManagementComponent
+      },
+      {
+        path:'app-management',  
+        component:DeployedComponent
+      },
+      {
         path:"app-deployment",
         children:[
           {

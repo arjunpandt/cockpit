@@ -57,7 +57,9 @@ export const environment = {
       clonePrivateRepo: {endpoint:'clone_private_repo', method:'POST'},
       createDeploy:{endpoint:'create_deployment', method:'POST'},
       clonePublicRepo:{endpoint:'clone_public_repo',method:'POST'},
-      getEksClusters:{endpoint:'/json-get-eks', method:'GET'}
+      getEksClusters:{endpoint:'/json-get-eks', method:'GET'},
+      appManagement:{endpoint:'/list_deployment',method:'POST'},
+      deleteDeployment:{endpoint:'delete_deployment',method:'POST'}
     }
   }
 };

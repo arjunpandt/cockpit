@@ -59,6 +59,9 @@ export class RegisterService {
   private clonePrivateRepo = `${environment.api.baseUrlAppDeployment}${environment.api.routes.clonePrivateRepo.endpoint}`
   private createDeploy = `${environment.api.baseUrlAppDeployment}${environment.api.routes.createDeploy.endpoint}`
   private clonePublicRepo = `${environment.api.baseUrlAppDeployment}${environment.api.routes.clonePublicRepo.endpoint}`
+  private appManagement = `${environment.api.baseUrlAppDeployment}${environment.api.routes.appManagement.endpoint}`
+   private deleteDeployment = `${environment.api.baseUrlAppDeployment}${environment.api.routes.deleteDeployment.endpoint}`
+
 
   jobId: any;
   constructor(private httpClient: HttpClient) { }
@@ -271,5 +274,12 @@ export class RegisterService {
   }
   clonePublicRepositoty(body: any): Observable<any> {
     return this.httpClient.post(this.clonePublicRepo, body);
+  }
+  applicationManagement(body: any): Observable<any>{
+    return this.httpClient.post(this.appManagement,body)
+  }
+
+  postDeleteDeployment(body: any): Observable<any>{
+    return this.httpClient.post(this.deleteDeployment,body)
   }
 }

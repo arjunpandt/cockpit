@@ -55,7 +55,7 @@ export class AwsComponent implements OnInit {
   }
 
   onCancel(){
-    this.router.navigate(["/home/app-deployment/select-cloud"]);
+    this.router.navigate(["/home/management/aws"]);
   }
 
   fetchAccounts() {

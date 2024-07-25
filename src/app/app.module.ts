@@ -45,6 +45,7 @@ import { SelectClusterComponent } from './select-cluster/select-cluster.componen
 import { AwsComponent } from './application-deployment/aws/aws.component';
 import { AzureComponent } from './application-deployment/azure/azure.component';
 import { DeployedComponent } from './deployed/deployed.component';
+import { AppManagementComponent } from './app-management/app-management.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -82,6 +83,7 @@ import { DeployedComponent } from './deployed/deployed.component';
     AwsComponent,
     AzureComponent,
     DeployedComponent,
+    AppManagementComponent,
   ],
   imports: [
     BrowserModule,

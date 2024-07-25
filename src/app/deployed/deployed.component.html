@@ -1,7 +1,39 @@
 <div id="wrap" class="input">
+    <header class="input-heade">
+        <h1>Application Management</h1>
+    </header>
     <section class="input-content">
-        <h2>Application </h2>
-        <form class="form">
-        </form>
+        <h2>Deployed Applications</h2>
+        <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">App Name</th>
+                <th scope="col">Project Name</th>
+                <th scope="col">Account Name</th>
+                <th scope="col">Cluster Name</th>
+                <th scope="col">Endpoint</th>
+                <th scope="col"> Username</th>
+                <th scope="col">Delete Application</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let row of tableData">
+                <td scope="row">{{row.app_name}}</td>
+                <td>{{row.project_name}}</td>
+                <td>{{row.account_name}}</td>
+                <td>{{row.cluster_name}}</td>
+                <td><a [href]="row.endpoint">{{row.endpoint}}</a></td>
+                <td>{{row.username}}</td>
+                <td style="text-align: center;"><button class="btn  btn-danger" (click)="onDelete(row)">Delete</button></td>
+              </tr>
+              
+            </tbody>
+            
+          </table>
+          <div *ngIf="noData" style="text-align: center; margin-top: 5rem; font-weight: 900;">{{tableData}}No data TO Display</div>
     </section>
+    <div *ngIf="showProgressBar || deletingApplication" class="loading-overlay">
+      <div class="loader"></div>
+      <p class="loading-text">{{showProgressBar?'Just a moment! Fecting Applications Data...':'Just a moment! Deleting Your Application...'}}</p>
+    </div>
 </div>
