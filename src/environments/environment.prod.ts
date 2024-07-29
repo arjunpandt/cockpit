@@ -58,7 +58,9 @@ export const environment = {
       getEksClusters:{endpoint:'/json-get-eks', method:'GET'},
       createDeploy:{endpoint:'create_deployment', method:'POST'},
       appManagement:{endpoint:'/list_deployment',method:'POST'},
-      deleteDeployment:{endpoint:'/delete_deployment',method:'POST'}
+      deleteDeployment:{endpoint:'/delete_deployment',method:'POST'},
+      createMonitoring:{endpoint:'create_monitoring',method:'POST'},
+      grafanaPassword:{endpoint:'get_grafana_password',method:'POST'},
     }
   }
 };

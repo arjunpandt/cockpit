@@ -61,6 +61,8 @@ export class RegisterService {
   private clonePublicRepo = `${environment.api.baseUrlAppDeployment}${environment.api.routes.clonePublicRepo.endpoint}`
   private appManagement = `${environment.api.baseUrlAppDeployment}${environment.api.routes.appManagement.endpoint}`
    private deleteDeployment = `${environment.api.baseUrlAppDeployment}${environment.api.routes.deleteDeployment.endpoint}`
+   private createMonitoring = `${environment.api.baseUrlAppDeployment}${environment.api.routes.createMonitoring.endpoint}`
+   private grafanaPassword = `${environment.api.baseUrlAppDeployment}${environment.api.routes.grafanaPassword.endpoint}`
 
 
   jobId: any;
@@ -281,5 +283,12 @@ export class RegisterService {
 
   postDeleteDeployment(body: any): Observable<any>{
     return this.httpClient.post(this.deleteDeployment,body)
+  }
+
+  monitoring(body: any): Observable<any>{
+    return this.httpClient.post(this.createMonitoring,body)
+  }
+  grafanaPass(body: any): Observable<any>{
+    return this.httpClient.post(this.grafanaPassword,body)
   }
 }

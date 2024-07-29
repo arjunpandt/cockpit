@@ -21,4 +21,8 @@ export class SelectServiceComponent implements OnInit {
     console.log("test");
     this.router.navigate(["/home/cluster-management"]);
   }
+
+  onCLickMonitoring(){
+    this.router.navigate(["/home/monitoring/select-cloud"])
+  }
 }

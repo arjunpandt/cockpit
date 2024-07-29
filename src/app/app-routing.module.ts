@@ -25,6 +25,7 @@ import { SelectClusterComponent } from './select-cluster/select-cluster.componen
 import { AwsComponent } from './application-deployment/aws/aws.component';
 import { DeployedComponent } from './deployed/deployed.component';
 import { AppManagementComponent } from './app-management/app-management.component';
+import { MonitoringAwsComponent } from './monitoring-aws/monitoring-aws.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -136,6 +137,23 @@ const routes: Routes = [
       {
         path:"management/aws",
         component:AppManagementComponent
+      },
+      {
+        path:"monitoring",
+        children:[
+          {
+            path:'',
+            component:SelectClusterComponent
+          },
+          {
+            path:'select-cloud',
+            component:SelectClusterComponent
+          },
+          {
+            path:'aws',
+            component:MonitoringAwsComponent
+          }
+        ]
       },
       {
         path:'app-management',  

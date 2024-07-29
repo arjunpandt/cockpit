@@ -5,13 +5,15 @@
             <div><button class="btn btn-danger" (click)="onClickBack()">back</button></div>
         </div> -->
         <div class=" row device">
-            <div> <h1>Select Cloud </h1></div>
+            <div>
+                <h1 *ngIf=" currentRoute==='/home/monitoring/select-cloud'">Select Cloud For Monitoring</h1>
+                <h1 *ngIf=" currentRoute==='/home/app-deployment/select-cloud'">Select Cloud For Application Deployment</h1>
          </div>
         <div class="cloud-card">
             <div class="card device">
                 <div class="box" style="background-image: url(../../assets/aws.png);" (click)="onClickAws()">
                 </div>
-                <div class="card-label">
+                <div class="card-label"> 
                     <h3 style="color: black; text-align: center;">AWS</h3>
                 </div>
             </div>
@@ -33,6 +35,6 @@
             </div>
             
         </div>
-        <div *ngIf="currentRoute==='/home/app-deployment/select-cloud'" style="display: flex; justify-content: flex-start; margin-left: 7.5rem; margin-top: 2rem;"><button class="btn btn-danger" (click)="onClickBack()">Back</button></div>
+        <div *ngIf="currentRoute==='/home/app-deployment/select-cloud' || currentRoute==='/home/monitoring/select-cloud'" style="display: flex; justify-content: flex-start; margin-left: 7.5rem; margin-top: 2rem;"><button class="btn btn-danger" (click)="onClickBack()">Back</button></div>
     </div>
 </div>

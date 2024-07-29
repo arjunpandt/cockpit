@@ -46,6 +46,7 @@ import { AwsComponent } from './application-deployment/aws/aws.component';
 import { AzureComponent } from './application-deployment/azure/azure.component';
 import { DeployedComponent } from './deployed/deployed.component';
 import { AppManagementComponent } from './app-management/app-management.component';
+import { MonitoringAwsComponent } from './monitoring-aws/monitoring-aws.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -84,6 +85,7 @@ import { AppManagementComponent } from './app-management/app-management.componen
     AzureComponent,
     DeployedComponent,
     AppManagementComponent,
+    MonitoringAwsComponent,
   ],
   imports: [
     BrowserModule,
