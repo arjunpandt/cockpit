@@ -35,6 +35,6 @@
             </div>
             
         </div>
-        <div *ngIf="currentRoute==='/home/app-deployment/select-cloud' || currentRoute==='/home/monitoring/select-cloud'" style="display: flex; justify-content: flex-start; margin-left: 7.5rem; margin-top: 2rem;"><button class="btn btn-danger" (click)="onClickBack()">Back</button></div>
+        <div *ngIf="currentRoute==='/home/app-deployment/select-cloud' || currentRoute==='/home/monitoring/select-cloud'" style="display: flex; justify-content: flex-start; margin-left: 7.5rem; margin-top: 2rem; "><button class="btn" (click)="onClickBack()"><fa-icon title="Previous Step" style="width: 4rem; color: white; font-size: 2rem;" [icon]="faArrowLeft"></fa-icon></button></div>
     </div>
 </div>

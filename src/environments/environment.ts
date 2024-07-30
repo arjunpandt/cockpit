@@ -59,7 +59,9 @@ export const environment = {
       clonePublicRepo:{endpoint:'clone_public_repo',method:'POST'},
       getEksClusters:{endpoint:'/json-get-eks', method:'GET'},
       appManagement:{endpoint:'/list_deployment',method:'POST'},
+      monitoringManagement:{endpoint:'/list_monitoring',method:'POST'},
       deleteDeployment:{endpoint:'delete_deployment',method:'POST'},
+      deleteMonitoring:{endpoint:'delete_monitoring',method:'POST'},
       createMonitoring:{endpoint:'create_monitoring',method:'POST'},
       grafanaPassword:{endpoint:'get_grafana_password',method:'POST'},
       

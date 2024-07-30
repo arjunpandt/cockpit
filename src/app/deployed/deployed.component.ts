@@ -11,12 +11,14 @@ export class DeployedComponent implements OnInit {
   showProgressBar: boolean = false;
   deletingApplication: boolean = false;
   noData:boolean=false;
+  username:string='';
 
   constructor(private service: RegisterService) { }
 
   ngOnInit(): void {
     this.showProgressBar = true;
-    this.service.applicationManagement({ "username": "abhidevops", "account_name": "cockpit" }).subscribe(
+    this.username = localStorage.getItem("username") ?? '';
+    this.service.applicationManagement({ "username": this.username }).subscribe(
       (res) => {
         this.showProgressBar = false;
         this.tableData = res.data

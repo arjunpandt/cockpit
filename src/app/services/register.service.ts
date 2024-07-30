@@ -60,7 +60,9 @@ export class RegisterService {
   private createDeploy = `${environment.api.baseUrlAppDeployment}${environment.api.routes.createDeploy.endpoint}`
   private clonePublicRepo = `${environment.api.baseUrlAppDeployment}${environment.api.routes.clonePublicRepo.endpoint}`
   private appManagement = `${environment.api.baseUrlAppDeployment}${environment.api.routes.appManagement.endpoint}`
+  private monitoringManagement = `${environment.api.baseUrlAppDeployment}${environment.api.routes.monitoringManagement.endpoint}`
    private deleteDeployment = `${environment.api.baseUrlAppDeployment}${environment.api.routes.deleteDeployment.endpoint}`
+   private deleteMonitoring = `${environment.api.baseUrlAppDeployment}${environment.api.routes.deleteMonitoring.endpoint}`
    private createMonitoring = `${environment.api.baseUrlAppDeployment}${environment.api.routes.createMonitoring.endpoint}`
    private grafanaPassword = `${environment.api.baseUrlAppDeployment}${environment.api.routes.grafanaPassword.endpoint}`
 
@@ -280,9 +282,16 @@ export class RegisterService {
   applicationManagement(body: any): Observable<any>{
     return this.httpClient.post(this.appManagement,body)
   }
+  monitoringManagementList(body: any): Observable<any>{
+    return this.httpClient.post(this.monitoringManagement,body)
+  }
 
   postDeleteDeployment(body: any): Observable<any>{
     return this.httpClient.post(this.deleteDeployment,body)
+  }
+
+  postDeleteMonitoring(body: any): Observable<any>{
+    return this.httpClient.post(this.deleteMonitoring,body)
   }
 
   monitoring(body: any): Observable<any>{

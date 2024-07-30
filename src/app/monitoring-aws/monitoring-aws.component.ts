@@ -128,23 +128,24 @@ export class MonitoringAwsComponent implements OnInit {
   }
 
   getCredentials(){
-    this.showProgressBar = true;
-    this.service.grafanaPass(this.grafanaPassBody).subscribe(
-      (res)=>{
-        console.log(res);
+    this.router.navigate(["/home/monitoring/management"]);
+    // this.showProgressBar = true;
+    // this.service.grafanaPass(this.grafanaPassBody).subscribe(
+    //   (res)=>{
+    //     console.log(res);
         
-        this.garafanaPass= res.password
-        this.showProgressBar= false
-        this.toast.success('Successfully Fetched Your Credentials!')
-        this.showCrentials= true
-      },
-      (error)=>{
-        console.log(error);
-        this.showCrentials= true
-        this.showProgressBar= false
-      }
+    //     this.garafanaPass= res.password
+    //     this.showProgressBar= false
+    //     this.toast.success('Successfully Fetched Your Credentials!')
+    //     this.showCrentials= true
+    //   },
+    //   (error)=>{
+    //     console.log(error);
+    //     this.showCrentials= true
+    //     this.showProgressBar= false
+    //   }
 
-    )
+    // )
   }
 
   

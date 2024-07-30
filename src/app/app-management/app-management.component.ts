@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { faBackward } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-management',
@@ -7,6 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./app-management.component.scss']
 })
 export class AppManagementComponent implements OnInit {
+  faBackward=faBackward;
 
   constructor(private router: Router) { }
 

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+import { faBackward } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'app-select-cluster',
   templateUrl: './select-cluster.component.html',
@@ -8,6 +9,7 @@ import { Location } from '@angular/common';
 })
 export class SelectClusterComponent implements OnInit {
   currentRoute!: string;
+  faArrowLeft = faBackward;
   constructor(private router: Router,
     private route: ActivatedRoute,
     private location:Location

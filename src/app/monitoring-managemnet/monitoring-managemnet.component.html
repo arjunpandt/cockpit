@@ -1,39 +1,42 @@
 <div id="wrap" class="input">
     <header class="input-heade">
-        <h1>Application Management</h1>
+        <h1>Monitoring Management</h1>
     </header>
     <section class="input-content">
-        <h2>Deployed Applications</h2>
+        <h2>Deployed Monitoring Applications</h2>
         <table class="table table-striped">
             <thead>
               <tr>
                 <th scope="col">App Name</th>
+                <th scope="col"> Status</th>
                 <th scope="col">Project Name</th>
                 <th scope="col">Account Name</th>
                 <th scope="col">Cluster Name</th>
                 <th scope="col">Endpoint</th>
-                <th scope="col"> Username</th>
+                
+                <th scope="col">Credentials</th>
                 <th scope="col">Delete Application</th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let row of tableData">
+              <tr *ngFor="let row of tableData" style="font-weight: 400;">
                 <td scope="row">{{row.app_name}}</td>
+                <td style="color: green;"><fa-icon  [icon]="faCheckCircle"></fa-icon><b> Active</b></td>
                 <td>{{row.project_name}}</td>
                 <td>{{row.account_name}}</td>
                 <td>{{row.cluster_name}}</td>
                 <td><a [href]="'http://'+row.endpoint" target="_blank" [innerHTML]="row.endpoint"></a></td>
-                <td>{{row.username}}</td>
+                <td ><button class="btn btn-primary" (click)="getCredentials(row)">Get Credentials</button></td>
                 <td style="text-align: center;"><button class="btn  btn-danger" (click)="onDelete(row)">Delete</button></td>
               </tr>
               
             </tbody>
             
           </table>
-          <div *ngIf="noData" style="text-align: center; margin-top: 5rem; font-weight: 900;">{{tableData}}No data TO Display</div>
+          <div *ngIf="noData" style="text-align: center; margin-top: 5rem; font-weight: 900;">{{tableData}}No Data To Display</div>
     </section>
     <div *ngIf="showProgressBar || deletingApplication" class="loading-overlay">
       <div class="loader"></div>
-      <p class="loading-text">{{showProgressBar?'Just a moment! Fecting Applications Data...':'Just a moment! Deleting Your Application...'}}</p>
+      <p class="loading-text">{{showProgressBar?'Just a moment! Fecting Monitoring Applications Data...':'Just a moment! Deleting Your Monitoring Application...'}}</p>
     </div>
 </div>

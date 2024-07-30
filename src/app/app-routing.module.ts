@@ -26,6 +26,7 @@ import { AwsComponent } from './application-deployment/aws/aws.component';
 import { DeployedComponent } from './deployed/deployed.component';
 import { AppManagementComponent } from './app-management/app-management.component';
 import { MonitoringAwsComponent } from './monitoring-aws/monitoring-aws.component';
+import { MonitoringManagemnetComponent } from './monitoring-managemnet/monitoring-managemnet.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -152,6 +153,10 @@ const routes: Routes = [
           {
             path:'aws',
             component:MonitoringAwsComponent
+          },
+          {
+            path:'management',
+            component:MonitoringManagemnetComponent
           }
         ]
       },
