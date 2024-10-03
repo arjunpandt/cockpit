@@ -1,0 +1,69 @@
+<div id="wrap" class="input">
+    <header class="input-header">
+        <h1>Application Deployment</h1>
+    </header>
+    <section class="input-content">
+        <h2>Step 2. Project Creation</h2>
+        <form class="form" [formGroup]="createForm" (ngSubmit)="onSubmit()">
+            <label for="ProjectId">Project Id</label>
+            <input class="form__inset" type="text" formControlName="project_id" placeholder="Project Id"
+                name="ProjectId">
+            <div class="form-text validation-message text-danger"
+                *ngIf=" ProjectId.errors?.['required'] && (ProjectId.touched || ProjectId.dirty)">
+                Please Enter Project Id
+            </div>
+            <label for="ProjectName">Project Name</label>
+            <input class="form__inset" type="text" formControlName="project_name" placeholder="Project Name"
+                name="ProjectName">
+            <div class="form-text validation-message text-danger"
+                *ngIf=" ProjectName.errors?.['required'] && (ProjectName.touched || ProjectName.dirty)">
+                Please Enter Project Name
+            </div>
+            <label for="githuburl">GitHub URL</label>
+            <input class="form__inset" type="text" formControlName="githuburl" placeholder="GitHub URL"
+                name="githuburl">
+            <div class="form-text validation-message text-danger"
+                *ngIf=" GithubURL.errors?.['required'] && (GithubURL.touched || GithubURL.dirty)">
+                Please Enter GitHub URL
+            </div>
+            <label for="repotype">Repository Type</label>
+            <div class="tooltip-container">
+                <select class="form__inset" formControlName="repo_type" name="repotype">
+                    <option value="" disabled selected>Select Repository Type</option>
+                    <option value="private_repo">Private Repo</option>
+                    <option value="public_repo">Public Repo</option>
+                </select>
+                <mat-icon matTooltip="You need to select the Repository Type" class="info-icon">info</mat-icon>
+            </div>
+            <div class="form-text validation-message text-danger"
+                *ngIf="RepoType.errors?.['required'] && (RepoType.touched || RepoType.dirty)">
+                Please select Account Name
+            </div>
+
+            <label *ngIf="this.createForm.value['repo_type']==='private_repo'" for="PrivateToken">Private Token</label>
+            <input *ngIf="this.createForm.value['repo_type']==='private_repo'" class="form__inset" type="password"
+                formControlName="private_token" placeholder="Private Token" name="PrivateToken">
+            <div class="form-text validation-message text-danger"
+                *ngIf=" PrivateToken.errors?.['required'] && (PrivateToken.touched || PrivateToken.dirty) && this.createForm.value['repo_type']==='private_repo'">
+                Please Enter Private Token
+            </div>
+
+
+            <label for="Branch">Branch</label>
+            <input class="form__inset" type="text" formControlName="branch" placeholder="Branch" name="Branch">
+            <div class="form-text validation-message text-danger"
+                *ngIf=" Branch.errors?.['required'] && (Branch.touched || Branch.dirty)">
+                Please Enter Branch Name
+            </div>
+            <div *ngIf="showProgressBar" class="loading-overlay">
+                <div class="loader"></div>
+                <p class="loading-text">Just a moment! Creating Cluster...</p>
+            </div>
+        </form>
+        <div class="btns">
+            <button class="btn btn-cancel" (click)="onCancel()">Cancel</button>
+            <button class="btn btn-confirm" [disabled]="createForm.invalid" (click)="onSubmit()">NEXT</button>
+
+        </div>
+    </section>
+</div>

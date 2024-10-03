@@ -20,8 +20,8 @@ export class SelectClusterComponent implements OnInit {
     this.currentRoute= this.router.url;
   }
   onClickAws() {
-    if(this.currentRoute==='/home/monitoring/select-cloud' || this.currentRoute==='/home/monitoring'){
-      this.router.navigate(['home/monitoring/select'])
+    if(this.currentRoute==='/home/monitoring' || this.currentRoute==='/home/monitoring/select-cloud'){
+      this.router.navigate(['home/monitoring/aws-select'])
     } else {
       this.router.navigate(["/home/management/aws"]);
     }
@@ -40,16 +40,13 @@ export class SelectClusterComponent implements OnInit {
   }
 
   onClickGcp() {
-
-    // this.router.navigate(["/home/cloud-selection/gcp/gcp2"]);
-    Swal.fire({
-      icon: "info",
-      title: "Coming Soon!",
-      text: "This page is coming soon! We're excited to share it with you once it's ready.",
-      confirmButtonText: "Okay",
-      
-    });
+    if(this.currentRoute==='/home/monitoring' || this.currentRoute==='/home/monitoring/select-cloud'){
+      this.router.navigate(['home/monitoring/gcp-select'])
+    }  else {
+      this.router.navigate(["/home/management/gcp"]);
+    }
   }
+
   onClickBack(){
     this.router.navigate(["/home"]);
   }

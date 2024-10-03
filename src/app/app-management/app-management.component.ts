@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { faBackward } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -8,15 +8,23 @@ import { faBackward } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./app-management.component.scss']
 })
 export class AppManagementComponent implements OnInit {
+  currentRoute!: string;
   faBackward=faBackward;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+    private route: ActivatedRoute,
+  ) { }
 
   ngOnInit(): void {
+    this.currentRoute= this.router.url;
   }
 
   applicationDeployment=()=>{
-    this.router.navigate(["/home/app-deployment/aws"]);
+    if(this.currentRoute==='/home/management/aws'){
+      this.router.navigate(['/home/app-deployment/aws'])
+    } else {
+      this.router.navigate(["/home/app-deployment/gcp"]);
+    }
   }
 
   applicationManagement =()=>{

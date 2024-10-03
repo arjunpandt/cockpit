@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { faBackward } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -8,17 +8,24 @@ import { faBackward } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./select-monitoring.component.scss']
 })
 export class SelectMonitoringComponent implements OnInit {
-
+  currentRoute!: string;
   faBackward=faBackward;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+    private route: ActivatedRoute,
+  ) { }
 
   ngOnInit(): void {
+    this.currentRoute= this.router.url;
   }
 
   applicationDeployment=()=>{
-    this.router.navigate(["/home/monitoring/aws"]);
-  }
+    if(this.currentRoute==='/home/monitoring/aws-select'){
+      this.router.navigate(['/home/monitoring/aws'])
+    } else {
+      this.router.navigate(["/home/monitoring/gcp"]);
+    }
+  } 
 
   applicationManagement =()=>{
     this.router.navigate(["/home/monitoring/management"])

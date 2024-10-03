@@ -123,7 +123,7 @@ export class AwsComponent implements OnInit {
   }
 
   onNextEks(){
-    this.router.navigate(["/home/app-deployment"])
+    this.router.navigate(["/home/app-deployment/aws-create"])
     localStorage.setItem('account_name',this.selectedAccount)
     localStorage.setItem('cluster_name',this.selectedCluster)
   }

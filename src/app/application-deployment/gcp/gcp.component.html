@@ -1,0 +1,115 @@
+<div id="wrap" class="input " [ngClass]="{'dynamicHeight':!clusterForm,'dynamicHeightFull':clusterForm}">
+    <header class="input-header">
+        <h1>Select GKE Cluster</h1>
+    </header>
+    <section class="input-content">
+        <h2>Step 1. Select Cluster<span>GKE</span></h2>
+        <label for="accountname">Account Name</label>
+        <div class="tooltip-container">
+            <select class="form__inset" [(ngModel)]="selectedAccount" (change)="onAccountChange(selectedAccount)"
+                name="accountname">
+                <option value="" disabled selected>Select Account Name</option>
+                <option *ngFor="let acc of accountNames" [value]="acc">{{ acc }}</option>
+            </select>
+            <!-- <mat-icon matTooltip="You need to create an account first" class="info-icon">info</mat-icon> -->
+            <Button type="button" class="btn btn-primary"
+                style="margin-left: 10px; margin-bottom: 3px; height: 54px; font-size: large;"
+                (click)="onAddAccount()">Add Account </Button>
+        </div>
+        <div *ngIf="selectedAccount!==''">
+            <label for="name">Select Cluster</label>
+            <div class="tooltip-container">
+                <select class="form__inset" [(ngModel)]="selectedCluster" (change)="onClusterChange()">
+                    <option value="" disabled selected>Select Cluster </option>
+                    <option *ngFor="let cluster of selectCluster" [value]="cluster">{{ cluster }}</option>
+                </select>
+                <Button type="button" class="btn btn-primary"
+                    style="margin-left: 10px; margin-bottom: 3px; height: 54px; font-size: large;"
+                    (click)="addCluster()">Add Cluster </Button>
+            </div>
+        </div>
+
+        <form *ngIf="clusterForm" class="form" [formGroup]="createForm" (ngSubmit)="onNextEks()">
+            <label for="name">Project</label>
+            <input class="form__inset" type="text" formControlName="project" placeholder="Project" name="Project">
+            <div class="form-text validation-message text-danger"
+                *ngIf=" Project.errors?.['required'] && (Project.touched || Project.dirty)">
+                Please enter Project
+            </div>
+
+            <label for="name">Account Name</label>
+            <div class="tooltip-container">
+                <select class="form__inset" formControlName="account_name">
+                    <option value="" disabled selected>Select Account Name</option>
+                    <option *ngFor="let acc of accountNames" [value]="acc">{{ acc }}</option>
+                </select>
+                <mat-icon matTooltip="You need to create an account first" class="info-icon">info</mat-icon>
+            </div>
+            <div class="form-text validation-message text-danger"
+                *ngIf="AccountName.errors?.['required'] && (AccountName.touched || AccountName.dirty)">
+                Please select Account Name
+            </div>
+
+            <label for="name">Region</label>
+            <select class="form__inset" name="Region" formControlName="region" placeholder="Region">
+                <option value="us-central1">US Central</option>
+                <option value="us-east1">US East</option>
+                <option value="us-west1">US West</option>
+                <option value="asia-east1">Asia East</option>
+                <option value="asia-south1">Asia South</option>
+            </select>
+            <div class="form-text validation-message text-danger"
+                *ngIf=" Region.errors?.['required'] && (Region.touched || Region.dirty)">
+                Please enter Region
+            </div>
+            <label for="name">GKE Name</label>
+            <input class="form__inset" type="text" formControlName="gke_name" placeholder="GKE Name" name="GKE Name">
+            <div class="form-text validation-message text-danger"
+                *ngIf=" GkeName.errors?.['required'] && (GkeName.touched || GkeName.dirty)">
+                Please enter GKE Name
+            </div>
+
+            <label for="name">GKE Version</label>
+            <select class="form__inset" name="EKS Version" formControlName="gke_version" placeholder="GKE Version">
+                <option value="1.16">1.16</option>
+                <option value="1.17">1.17</option>
+                <option value="1.18">1.18</option>
+                <option value="1.19">1.19</option>
+                <option value="1.20">1.20</option>
+            </select>
+            <div class="form-text validation-message text-danger"
+                *ngIf=" GkeVersion.errors?.['required'] && (GkeVersion.touched || GkeVersion.dirty)">
+                Please enter GKE Version
+            </div>
+
+            <label for="name">Node Count</label>
+            <input class="form__inset" type="text" formControlName="node_count" placeholder="Node Count"
+                name="Node Count">
+            <div class="form-text validation-message text-danger"
+                *ngIf=" NodeCount.errors?.['required'] && (NodeCount.touched || NodeCount.dirty)">
+                Please enter Node Count
+            </div>
+
+            <label for="name">Cluster Type</label>
+            <select class="form__inset" formControlName="cluster_type" name="cluster_type">
+                <option value="Public">Public</option>
+                <option value="Private">Private</option>
+            </select>
+            <div class="form-text validation-message text-danger"
+                *ngIf=" ClusterType.errors?.['required'] && (ClusterType.touched || ClusterType.dirty)">
+                Please enter Cluster Type
+            </div>
+
+            <div *ngIf="showProgressBar" class="loading-overlay">
+                <div class="loader"></div>
+                <p class="loading-text">Just a moment! Creating Cluster...</p>
+            </div>
+        </form>
+        <div class="btns">
+            <button class="btn btn-cancel" (click)="onCancel()">Cancel</button>
+            <button class="btn btn-danger" [disabled]="(selectedCluster==='')" (click)="onNextEks()">Next</button>
+            <button *ngIf="clusterForm" class="btn btn-primary" [disabled]="createForm.invalid"
+                (click)="onSaveCluster()">Save</button>
+        </div>
+    </section>
+</div>

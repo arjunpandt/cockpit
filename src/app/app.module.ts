@@ -49,6 +49,9 @@ import { AppManagementComponent } from './app-management/app-management.componen
 import { MonitoringAwsComponent } from './monitoring-aws/monitoring-aws.component';
 import { MonitoringManagemnetComponent } from './monitoring-managemnet/monitoring-managemnet.component';
 import { SelectMonitoringComponent } from './select-monitoring/select-monitoring.component';
+import { GcpComponent } from './application-deployment/gcp/gcp.component';
+import { AppDeployemntGcpComponent } from './app-deployemnt-gcp/app-deployemnt-gcp.component';
+import { MonitoringGcpComponent } from './monitoring-gcp/monitoring-gcp.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -90,6 +93,9 @@ import { SelectMonitoringComponent } from './select-monitoring/select-monitoring
     MonitoringAwsComponent,
     MonitoringManagemnetComponent,
     SelectMonitoringComponent,
+    GcpComponent,
+    AppDeployemntGcpComponent,
+    MonitoringGcpComponent,
   ],
   imports: [
     BrowserModule,

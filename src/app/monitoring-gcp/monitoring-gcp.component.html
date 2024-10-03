@@ -1,0 +1,71 @@
+<div id="wrap" class="input dynamicHeight">
+    <header class="input-header">
+        <h1>Create Monitoring For Your Application</h1>
+    </header>
+    <section class="input-content">
+        <h2>Monitoring Details<span>GKE</span></h2>
+        <form class="form" [formGroup]="createForm" (ngSubmit)="onNextEks()">
+            <label for="accountname">Account Name</label>
+            <div class="tooltip-container">
+                <select class="form__inset" formControlName="account_name"
+                    (change)="onAccountChange(createForm.get('account_name')!.value)" name="accountname">
+                    <option value="" disabled selected>Select Account Name</option>
+                    <option *ngFor="let acc of accountNames" [value]="acc">{{ acc }}</option>
+                </select>
+
+                <!-- <mat-icon matTooltip="You need to create an account first" class="info-icon">info</mat-icon> -->
+            </div>
+            <div>
+                <label for="name">Select Cluster</label>
+                <div class="tooltip-container">
+                    <select class="form__inset" formControlName="cluster_name">
+                        <option value="" disabled selected>Select Cluster </option>
+                        <option *ngFor="let cluster of selectCluster" [value]="cluster">{{ cluster }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <label for="name">Project Id</label>
+            <input class="form__inset" type="text" formControlName="project_id" placeholder="Project Id"
+                name="Project Id">
+            <div class="form-text validation-message text-danger"
+                *ngIf=" ProjectId.errors?.['required'] && (ProjectId.touched || ProjectId.dirty)">
+                Please enter Project id
+            </div>
+
+            <label for="name">Project Name</label>
+            <input class="form__inset" type="text" formControlName="project_name" placeholder="Project Name"
+                name="Project Name">
+            <div class="form-text validation-message text-danger"
+                *ngIf=" ProjectName.errors?.['required'] && (ProjectName.touched || ProjectName.dirty)">
+                Please enter Project name
+            </div>
+
+            <label for="name">App Name</label>
+            <input class="form__inset" type="text" formControlName="app_name" placeholder="App Name" name="App Name">
+            <div class="form-text validation-message text-danger"
+                *ngIf=" AppName.errors?.['required'] && (AppName.touched || AppName.dirty)">
+                Please enter App name
+            </div>
+
+            <div *ngIf="showProgressBar" class="loading-overlay">
+                <div class="loader"></div>
+                <p class="loading-text">Just a moment...</p>
+            </div>
+        </form>
+        <div class="btns">
+            <button class="btn btn-cancel" (click)="onCancel()">Cancel</button>
+            <button class="btn btn-danger" [disabled]="(createForm.invalid)" (click)="onNextEks()">Submit</button>
+        </div>
+        <div *ngIf="showCredentialButton">
+            <div
+                style="margin-top: 40px; display:inline-block; margin-right: 10px; font-weight: 700; font-size: large;">
+                Monitoring Deployed Successfully!</div>
+            <button class="btn btn-primary" (click)="getCredentials()">Check Credentials</button>
+        </div>
+        <div *ngIf="showCrentials" style="margin-top: 10px; ">
+            <p><b>Endpoint</b>: <a [href]="'http://'+endpoint" target="_blank" [innerHTML]="endpoint"></a></p>
+            <p> <b>Password</b>: {{garafanaPass}}</p>
+        </div>
+    </section>
+</div>

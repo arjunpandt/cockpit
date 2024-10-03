@@ -28,6 +28,9 @@ import { AppManagementComponent } from './app-management/app-management.componen
 import { MonitoringAwsComponent } from './monitoring-aws/monitoring-aws.component';
 import { MonitoringManagemnetComponent } from './monitoring-managemnet/monitoring-managemnet.component';
 import { SelectMonitoringComponent } from './select-monitoring/select-monitoring.component';
+import { GcpComponent } from './application-deployment/gcp/gcp.component';
+import { AppDeployemntGcpComponent } from './app-deployemnt-gcp/app-deployemnt-gcp.component';
+import { MonitoringGcpComponent } from './monitoring-gcp/monitoring-gcp.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -137,8 +140,20 @@ const routes: Routes = [
         ]
       },
       {
+        path:"management/gcp",
+        component:AppManagementComponent
+      },
+      {
         path:"management/aws",
         component:AppManagementComponent
+      },
+      {
+        path:"monitoring/aws-select",
+        component:SelectMonitoringComponent
+      },
+      {
+        path:"monitoring/gcp-select",
+        component:SelectMonitoringComponent
       },
       {
         path:"monitoring",
@@ -152,12 +167,12 @@ const routes: Routes = [
             component:SelectClusterComponent
           },
           {
-            path:'select',
-            component:SelectMonitoringComponent
-          },
-          {
             path:'aws',
             component:MonitoringAwsComponent
+          },
+          {
+            path:'gcp',
+            component:MonitoringGcpComponent
           },
           {
             path:'management',
@@ -173,8 +188,12 @@ const routes: Routes = [
         path:"app-deployment",
         children:[
           {
-            path:'',
+            path:'aws-create',
             component:AppDeploymentAwsComponent
+          },
+          {
+            path:'gcp-create',
+            component:AppDeployemntGcpComponent
           },
           {
             path:'select-cloud',
@@ -187,6 +206,10 @@ const routes: Routes = [
           {
             path:'aws',
             component:AwsComponent
+          },
+          {
+            path:'gcp',
+            component:GcpComponent
           },
           {
             path:'azure',
