@@ -1,6 +1,6 @@
 on:
   push:
-    branches: ['cockpit_dev']
+    branches: ['gcpChanges']
     paths: ['src/**']
 
 jobs:
