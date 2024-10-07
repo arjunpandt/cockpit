@@ -58,7 +58,7 @@ export class GcpComponent implements OnInit {
     this.postUsername = {
       username: this.username
     };
-    this.service.getAwsCrediantial(this.postUsername).subscribe(
+    this.service.getGcpCrediantial(this.postUsername).subscribe(
       (data) => {
         this.accountNames = data.map((item: any) => item);
       },
@@ -69,16 +69,14 @@ export class GcpComponent implements OnInit {
   }
 
   onAccountChange(selectedAccount: string) {
-    console.log(selectedAccount);
     this.createForm.value["account_name"] = selectedAccount;
     this.createForm.patchValue({ account_name: selectedAccount })
     const body = {
       username: this.username,
       account_name: selectedAccount
     }
-    this.service.getEksClusters(body).subscribe(
+    this.service.getGkeClusters(body).subscribe(
       (res) => {
-        console.log(res);
         this.selectCluster = res.clusters
 
       },
@@ -114,7 +112,6 @@ export class GcpComponent implements OnInit {
   onAddAccount() {
     const newTab = this.router.createUrlTree(['home/cloud-selection/gcp'], { queryParams: { action: 'Add' } }).toString();
     window.open(newTab, '_blank')
-    console.log(newTab);
   }
 
   onNextEks() {

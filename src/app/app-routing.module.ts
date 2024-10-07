@@ -181,7 +181,11 @@ const routes: Routes = [
         ]
       },
       {
-        path:'app-management',  
+        path:'app-management/aws',  
+        component:DeployedComponent
+      },
+      {
+        path:'app-management/gcp',  
         component:DeployedComponent
       },
       {
@@ -200,7 +204,11 @@ const routes: Routes = [
             component: SelectClusterComponent
           },
           {
-            path:'deploy',
+            path:'deploy/aws',
+            component:AppDeploymentComponent
+          },
+          {
+            path:'deploy/gcp',
             component:AppDeploymentComponent
           },
           {

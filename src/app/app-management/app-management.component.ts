@@ -9,30 +9,33 @@ import { faBackward } from '@fortawesome/free-solid-svg-icons';
 })
 export class AppManagementComponent implements OnInit {
   currentRoute!: string;
-  faBackward=faBackward;
+  faBackward = faBackward;
 
   constructor(private router: Router,
     private route: ActivatedRoute,
   ) { }
 
   ngOnInit(): void {
-    this.currentRoute= this.router.url;
+    this.currentRoute = this.router.url;
   }
 
-  applicationDeployment=()=>{
-    if(this.currentRoute==='/home/management/aws'){
+  applicationDeployment = () => {
+    if (this.currentRoute === '/home/management/aws') {
       this.router.navigate(['/home/app-deployment/aws'])
     } else {
       this.router.navigate(["/home/app-deployment/gcp"]);
     }
   }
 
-  applicationManagement =()=>{
-    this.router.navigate(["/home/app-management"])
+  applicationManagement = () => {
+    if (this.currentRoute === '/home/management/aws') {
+      this.router.navigate(['/home/app-management/aws'])
+    } else {
+      this.router.navigate(["/home/app-management/gcp"]);
+    }
   }
 
-  onBack(){
+  onBack() {
     this.router.navigate(["/home/app-deployment/select-cloud"])
   }
-
 }

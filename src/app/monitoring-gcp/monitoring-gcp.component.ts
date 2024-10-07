@@ -57,7 +57,7 @@ export class MonitoringGcpComponent implements OnInit {
     this.postUsername = {
       username: this.username
     };
-    this.service.getAwsCrediantial(this.postUsername).subscribe(
+    this.service.getGcpCrediantial(this.postUsername).subscribe(
       (data) => {
         this.accountNames = data.map((item: any) => item);
         this.showProgressBar = false;
@@ -71,14 +71,13 @@ export class MonitoringGcpComponent implements OnInit {
 
   onAccountChange(selectedAccount: any) {
     this.showProgressBar = true;
-    console.log(selectedAccount);
     this.createForm.value["account_name"] = selectedAccount;
     this.createForm.patchValue({ account_name: selectedAccount })
     const body = {
       username: this.username,
       account_name: selectedAccount
     }
-    this.service.getEksClusters(body).subscribe(
+    this.service.getGkeClusters(body).subscribe(
       (res) => {
         this.showProgressBar = false;
         console.log(res);
@@ -86,7 +85,6 @@ export class MonitoringGcpComponent implements OnInit {
       },
       (error) => {
         this.showProgressBar = false;
-        console.log(error);
       }
     )
   }
@@ -95,7 +93,6 @@ export class MonitoringGcpComponent implements OnInit {
     this.showProgressBar = true;
     this.showCredentialButton = false
     this.showCrentials = false
-    console.log(this.createForm.value);
     this.service.monitoring(this.createForm.value).subscribe(
       (res) => {
         this.showProgressBar = false;
@@ -107,8 +104,7 @@ export class MonitoringGcpComponent implements OnInit {
       },
       (error) => {
         this.showProgressBar = false;
-        this.showCredentialButton = false
-        console.log(error);
+        this.showCredentialButton = false;
       }
     )
 

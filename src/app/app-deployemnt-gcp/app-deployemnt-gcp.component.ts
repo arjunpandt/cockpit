@@ -10,16 +10,15 @@ import { Router } from '@angular/router';
   styleUrls: ['./app-deployemnt-gcp.component.scss']
 })
 export class AppDeployemntGcpComponent implements OnInit {
-
   showProgressBar: boolean = false;
   createForm = new FormGroup({
-    githuburl: new FormControl('', [Validators.required]),
-    repo_type: new FormControl('', [Validators.required]),
-    private_token: new FormControl(''),
-    project_name: new FormControl('', [Validators.required]),
-    project_id: new FormControl('', [Validators.required]),
-    branch: new FormControl('', [Validators.required])
-  });
+  githuburl: new FormControl('', [Validators.required]),
+  repo_type: new FormControl('', [Validators.required]),
+  private_token: new FormControl(''),
+  project_name: new FormControl('', [Validators.required]),
+  project_id: new FormControl('', [Validators.required]),
+  branch: new FormControl('', [Validators.required])
+});
 
   constructor(private service: RegisterService, private toast: ToastrService, private router: Router) { }
 
@@ -38,12 +37,9 @@ export class AppDeployemntGcpComponent implements OnInit {
         "project_id": this.createForm.value["project_id"],
         "branch": this.createForm.value["branch"]
       }
-      console.log("private repo");
-      debugger;
       this.service.clonePrivateRepositoty(data).subscribe((res) => {
-        console.log(res);
         this.toast.success(res.msg);
-        this.router.navigate(["/home/app-deployment/deploy"])
+        this.router.navigate(["/home/app-deployment/deploy/gcp"])
       },
         (error) => {
           this.toast.error(error.error.error)
@@ -55,11 +51,9 @@ export class AppDeployemntGcpComponent implements OnInit {
         "project_id": this.createForm.value["project_id"],
         "branch": this.createForm.value["branch"]
       }
-      console.log("public repo");
-      this.service.clonePublicRepositoty(data).subscribe((res) => {
-        console.log(res);
+      this.service.clonePublicGcpRepositoty(data).subscribe((res) => {
         this.toast.success(res.msg)
-        this.router.navigate(["/home/app-deployment/deploy"])
+        this.router.navigate(["/home/app-deployment/deploy/gcp"])
       },
         (error) => {
           console.log(error.error);
@@ -69,7 +63,6 @@ export class AppDeployemntGcpComponent implements OnInit {
   }
 
   onCancel() {
-    console.log("test");
     this.router.navigate(["/home/app-deployment/gcp"]);
   }
 

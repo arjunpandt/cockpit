@@ -50,6 +50,7 @@ export class RegisterService {
   private getAwsCred = `${environment.api.baseUrl}${environment.api.routes.getAws.endpoint}`;
   private getGcpCred = `${environment.api.baseUrl}${environment.api.routes.getGcp.endpoint}`;
   private getEksCluster= `${environment.api.baseUrl}${environment.api.routes.getEksClusters.endpoint}`;
+  private getGkeCluster= `${environment.api.baseUrl}${environment.api.routes.getGkeClusters.endpoint}`;
   private postRedirectAks = `${environment.api.baseUrl}${environment.api.routes.postRedirectAksCluster.endpoint}`;
   private postRedirectlogAks = `${environment.api.baseUrl}${environment.api.routes.postRedirectlogAksCluster.endpoint}`;
   private postRedirectEks = `${environment.api.baseUrl}${environment.api.routes.postRedirectEksCluster.endpoint}`;
@@ -58,10 +59,14 @@ export class RegisterService {
   private postRedirectlogGcp = `${environment.api.baseUrl}${environment.api.routes.postRedirectlogGcpCluster.endpoint}`
   private clonePrivateRepo = `${environment.api.baseUrlAppDeployment}${environment.api.routes.clonePrivateRepo.endpoint}`
   private createDeploy = `${environment.api.baseUrlAppDeployment}${environment.api.routes.createDeploy.endpoint}`
+  private createGcpDeploy = `${environment.api.baseUrlGcpDeployment}${environment.api.routes.createDeploy.endpoint}`
   private clonePublicRepo = `${environment.api.baseUrlAppDeployment}${environment.api.routes.clonePublicRepo.endpoint}`
+  private clonePublicGcpRepo = `${environment.api.baseUrlGcpDeployment}${environment.api.routes.clonePublicRepo.endpoint}`
   private appManagement = `${environment.api.baseUrlAppDeployment}${environment.api.routes.appManagement.endpoint}`
+  private appGcpManagement = `${environment.api.baseUrlGcpDeployment}${environment.api.routes.appManagement.endpoint}`
   private monitoringManagement = `${environment.api.baseUrlAppDeployment}${environment.api.routes.monitoringManagement.endpoint}`
    private deleteDeployment = `${environment.api.baseUrlAppDeployment}${environment.api.routes.deleteDeployment.endpoint}`
+  private deleteGcpDeployment = `${environment.api.baseUrlGcpDeployment}${environment.api.routes.deleteDeployment.endpoint}`
    private deleteMonitoring = `${environment.api.baseUrlAppDeployment}${environment.api.routes.deleteMonitoring.endpoint}`
    private createMonitoring = `${environment.api.baseUrlAppDeployment}${environment.api.routes.createMonitoring.endpoint}`
    private grafanaPassword = `${environment.api.baseUrlAppDeployment}${environment.api.routes.grafanaPassword.endpoint}`
@@ -144,6 +149,10 @@ export class RegisterService {
 
   getEksClusters(body: any):  Observable<any>{
     return this.httpClient.post(this.getEksCluster, body)
+  }
+
+  getGkeClusters(body: any):  Observable<any>{
+    return this.httpClient.post(this.getGkeCluster, body)
   }
 
   postAzureCreationStatus(gcpBody: any): Observable<any> {
@@ -273,14 +282,27 @@ export class RegisterService {
   clonePrivateRepositoty(body: any): Observable<any> {
     return this.httpClient.post(this.clonePrivateRepo, body);
   }
-  crateDeployment(body: any): Observable<any> {
+  createDeployment(body: any): Observable<any> {
     return this.httpClient.post(this.createDeploy, body);
   }
+
+  createGcpDeployment(body: any): Observable<any> {
+    return this.httpClient.post(this.createGcpDeploy, body);
+  }
+
   clonePublicRepositoty(body: any): Observable<any> {
     return this.httpClient.post(this.clonePublicRepo, body);
   }
+
+  clonePublicGcpRepositoty(body: any): Observable<any> {
+    return this.httpClient.post(this.clonePublicGcpRepo, body);
+  }
+
   applicationManagement(body: any): Observable<any>{
     return this.httpClient.post(this.appManagement,body)
+  }
+  applicationGcpManagement(body: any): Observable<any>{
+    return this.httpClient.post(this.appGcpManagement,body)
   }
   monitoringManagementList(body: any): Observable<any>{
     return this.httpClient.post(this.monitoringManagement,body)
@@ -288,6 +310,10 @@ export class RegisterService {
 
   postDeleteDeployment(body: any): Observable<any>{
     return this.httpClient.post(this.deleteDeployment,body)
+  }
+
+  postDeleteGcpDeployment(body: any): Observable<any>{
+    return this.httpClient.post(this.deleteGcpDeployment,body)
   }
 
   postDeleteMonitoring(body: any): Observable<any>{

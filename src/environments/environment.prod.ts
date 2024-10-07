@@ -7,6 +7,7 @@ export const environment = {
   api:{
     baseUrl:"https://cockpit.shahenvaz.tech/",
     baseUrlAppDeployment:"https://apps.shahenvaz.tech/",
+    baseUrlGcpDeployment:"https://gcpbackend.shahenvaz.tech/",
     routes:{
       registerUser:{endpoint:'jsonRegister', method:'POST'},
       loginUser: {endpoint:'JsonLogin', method:'POST'},
@@ -56,6 +57,7 @@ export const environment = {
       clonePrivateRepo: {endpoint:'clone_private_repo', method:'POST'},
       clonePublicRepo:{endpoint:'clone_public_repo',method:'POST'},
       getEksClusters:{endpoint:'/json-get-eks', method:'GET'},
+      getGkeClusters:{endpoint:'/json-get-gke', method:'GET'},
       createDeploy:{endpoint:'create_deployment', method:'POST'},
       appManagement:{endpoint:'/list_deployment',method:'POST'},
       monitoringManagement:{endpoint:'/list_monitoring',method:'POST'},
