@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RegisterService } from '../services/register.service';
 import { ToastrService } from 'ngx-toastr';
@@ -18,8 +18,8 @@ export class MonitoringGcpComponent implements OnInit {
     cluster_name: new FormControl('', [Validators.required]),
     account_name: new FormControl('', [Validators.required]),
     project_name: new FormControl('', [Validators.required]),
-    project_id: new FormControl('', [Validators.required]),
-    app_name: new FormControl('', [Validators.required]),
+    gcp_project_key: new FormControl('', [Validators.required]),
+    app_name: new FormArray([], [Validators.required]),
     username: new FormControl('', [Validators.required])
   });
 
@@ -37,6 +37,15 @@ export class MonitoringGcpComponent implements OnInit {
   grafanaPassBody = {}
   showCredentialButton = false;
   showCrentials = false;
+  // options : any= [
+  //   { id: 1, name: 'Option 1' },
+  //   { id: 2, name: 'Option 2' },
+  //   { id: 3, name: 'Option 3' },
+  // ];
+  options: any[] = []; 
+
+  selectedOptions: any[] = [];
+  isDropdownOpen = false;
 
   constructor(private router: Router,
     private service: RegisterService,
@@ -48,9 +57,31 @@ export class MonitoringGcpComponent implements OnInit {
     this.createForm.patchValue({ 'username': this.username })
     this.awsBody = {
       username: this.username
+    };
+  }
+
+  toggleDropdown() {
+    this.isDropdownOpen = !this.isDropdownOpen;
+  }
+
+  toggleOption(option: any) {
+    const index = this.selectedOptions.indexOf(option);
+    if (index === -1) {
+      this.selectedOptions.push(option);
+    } else {
+      this.selectedOptions.splice(index, 1);
     }
   }
 
+  isSelected(option: any): boolean {
+    return this.selectedOptions.indexOf(option) !== -1;
+  }
+
+  get displayValue(): string {
+    return this.selectedOptions.length > 0
+      ? this.selectedOptions.map(o => o).join(', ')
+      : 'Select options';
+  }
 
   fetchAccounts() {
     this.showProgressBar = true;
@@ -69,6 +100,33 @@ export class MonitoringGcpComponent implements OnInit {
     );
   }
 
+  fetchAppNames(selectedAccount: any, selectedCluster: any) {
+    console.log(selectedAccount)
+    this.showProgressBar = true;
+    this.createForm.value["account_name"] = selectedAccount;
+    this.createForm.patchValue({ account_name: selectedAccount })
+    this.createForm.value["cluster_name"] = selectedCluster;
+    this.createForm.patchValue({ cluster_name: selectedCluster })
+    const body = {
+      username: this.username,
+      account_name: selectedAccount,
+      cluster_name: selectedCluster
+    }
+console.log(selectedCluster)
+    // Replace with your actual API call to fetch app names
+    this.service.getGkeApps(body).subscribe(
+      (data) => {
+        this.options = data.apps; 
+        console.log(this.options)
+        this.showProgressBar = false;
+      },
+      (error) => {
+        this.toast.error(error.error.message);
+        this.showProgressBar = false;
+      }
+    );
+  }
+
   onAccountChange(selectedAccount: any) {
     this.showProgressBar = true;
     this.createForm.value["account_name"] = selectedAccount;
@@ -81,7 +139,8 @@ export class MonitoringGcpComponent implements OnInit {
       (res) => {
         this.showProgressBar = false;
         console.log(res);
-        this.selectCluster = res.clusters
+        this.selectCluster = res.clusters;
+        // this.fetchAppNames(selectedAccount);
       },
       (error) => {
         this.showProgressBar = false;
@@ -90,10 +149,15 @@ export class MonitoringGcpComponent implements OnInit {
   }
 
   onNextEks() {
+    if (this.createForm.valid) {
+      const selectedApps = this.createForm.get('app_name')?.value;
+      console.log('Selected Apps:', selectedApps);
+      // Proceed with your form submission logic
+    }
     this.showProgressBar = true;
     this.showCredentialButton = false
     this.showCrentials = false
-    this.service.monitoring(this.createForm.value).subscribe(
+    this.service.gcpMonitoring(this.createForm.value).subscribe(
       (res) => {
         this.showProgressBar = false;
         this.showCredentialButton = true;
@@ -140,11 +204,11 @@ export class MonitoringGcpComponent implements OnInit {
   }
 
   get ProjectId(): FormControl {
-    return this.createForm.get("project_id") as FormControl;
+    return this.createForm.get("gcp_project_key") as FormControl;
   }
 
-  get AppName(): FormControl {
-    return this.createForm.get("app_name") as FormControl;
+  get AppName(): FormArray {
+    return this.createForm.get("app_name") as FormArray;
   }
 
   get AccountName(): FormControl {

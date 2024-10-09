@@ -60,6 +60,7 @@ export const environment = {
       clonePublicRepo:{endpoint:'clone_public_repo',method:'POST'},
       getEksClusters:{endpoint:'/json-get-eks', method:'GET'},
       getGkeClusters:{endpoint:'/json-get-gke', method:'GET'},
+      getGkeApp:{endpoint:'/get_app_name', method:'GET'},
       appManagement:{endpoint:'/list_deployment',method:'POST'},
       monitoringManagement:{endpoint:'/list_monitoring',method:'POST'},
       deleteDeployment:{endpoint:'delete_deployment',method:'POST'},

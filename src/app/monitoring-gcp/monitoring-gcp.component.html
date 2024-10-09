@@ -18,7 +18,8 @@
             <div>
                 <label for="name">Select Cluster</label>
                 <div class="tooltip-container">
-                    <select class="form__inset" formControlName="cluster_name">
+                    <select class="form__inset" formControlName="cluster_name" 
+                    (change)="fetchAppNames(createForm.get('account_name')!.value, createForm.get('cluster_name')!.value)">
                         <option value="" disabled selected>Select Cluster </option>
                         <option *ngFor="let cluster of selectCluster" [value]="cluster">{{ cluster }}</option>
                     </select>
@@ -26,8 +27,8 @@
             </div>
 
             <label for="name">Project Id</label>
-            <input class="form__inset" type="text" formControlName="project_id" placeholder="Project Id"
-                name="Project Id">
+            <input class="form__inset" type="text" formControlName="gcp_project_key" placeholder="Project Id"
+                name="gcp project key">
             <div class="form-text validation-message text-danger"
                 *ngIf=" ProjectId.errors?.['required'] && (ProjectId.touched || ProjectId.dirty)">
                 Please enter Project id
@@ -42,11 +43,28 @@
             </div>
 
             <label for="name">App Name</label>
-            <input class="form__inset" type="text" formControlName="app_name" placeholder="App Name" name="App Name">
+            <!-- <input class="form__inset" type="text" formControlName="app_name" placeholder="App Name" name="App Name">
             <div class="form-text validation-message text-danger"
                 *ngIf=" AppName.errors?.['required'] && (AppName.touched || AppName.dirty)">
                 Please enter App name
-            </div>
+            </div> -->
+            
+            <div class="tooltip-container">
+                <div class="form__inset" (click)="toggleDropdown()">
+                  {{ displayValue }}
+                </div>
+                <div class="dropdown-list" *ngIf="isDropdownOpen">
+                  <div *ngFor="let option of options" class="dropdown-item">
+                    <input formArrayName="app_name" name="App Name"
+                      type="checkbox"
+                      [checked]="isSelected(option)"
+                      (change)="toggleOption(option)"
+                    />
+                    {{ option }}
+                  </div>
+                </div>
+              </div>
+              
 
             <div *ngIf="showProgressBar" class="loading-overlay">
                 <div class="loader"></div>

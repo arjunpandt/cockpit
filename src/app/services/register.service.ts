@@ -51,6 +51,7 @@ export class RegisterService {
   private getGcpCred = `${environment.api.baseUrl}${environment.api.routes.getGcp.endpoint}`;
   private getEksCluster= `${environment.api.baseUrl}${environment.api.routes.getEksClusters.endpoint}`;
   private getGkeCluster= `${environment.api.baseUrl}${environment.api.routes.getGkeClusters.endpoint}`;
+  private getGkeApp= `${environment.api.baseUrlGcpDeployment}${environment.api.routes.getGkeApp.endpoint}`;
   private postRedirectAks = `${environment.api.baseUrl}${environment.api.routes.postRedirectAksCluster.endpoint}`;
   private postRedirectlogAks = `${environment.api.baseUrl}${environment.api.routes.postRedirectlogAksCluster.endpoint}`;
   private postRedirectEks = `${environment.api.baseUrl}${environment.api.routes.postRedirectEksCluster.endpoint}`;
@@ -69,6 +70,7 @@ export class RegisterService {
   private deleteGcpDeployment = `${environment.api.baseUrlGcpDeployment}${environment.api.routes.deleteDeployment.endpoint}`
    private deleteMonitoring = `${environment.api.baseUrlAppDeployment}${environment.api.routes.deleteMonitoring.endpoint}`
    private createMonitoring = `${environment.api.baseUrlAppDeployment}${environment.api.routes.createMonitoring.endpoint}`
+  private createGcpMonitoring = `${environment.api.baseUrlGcpDeployment}${environment.api.routes.createMonitoring.endpoint}`
    private grafanaPassword = `${environment.api.baseUrlAppDeployment}${environment.api.routes.grafanaPassword.endpoint}`
 
 
@@ -153,6 +155,10 @@ export class RegisterService {
 
   getGkeClusters(body: any):  Observable<any>{
     return this.httpClient.post(this.getGkeCluster, body)
+  }
+
+  getGkeApps(body: any):  Observable<any>{
+    return this.httpClient.post(this.getGkeApp, body)
   }
 
   postAzureCreationStatus(gcpBody: any): Observable<any> {
@@ -323,6 +329,11 @@ export class RegisterService {
   monitoring(body: any): Observable<any>{
     return this.httpClient.post(this.createMonitoring,body)
   }
+
+  gcpMonitoring(body: any): Observable<any>{
+    return this.httpClient.post(this.createGcpMonitoring,body)
+  }
+
   grafanaPass(body: any): Observable<any>{
     return this.httpClient.post(this.grafanaPassword,body)
   }
