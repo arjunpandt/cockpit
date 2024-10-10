@@ -37,12 +37,7 @@ export class MonitoringGcpComponent implements OnInit {
   grafanaPassBody = {}
   showCredentialButton = false;
   showCrentials = false;
-  // options : any= [
-  //   { id: 1, name: 'Option 1' },
-  //   { id: 2, name: 'Option 2' },
-  //   { id: 3, name: 'Option 3' },
-  // ];
-  options: any[] = []; 
+  options: any[] = [];
 
   selectedOptions: any[] = [];
   isDropdownOpen = false;
@@ -68,8 +63,13 @@ export class MonitoringGcpComponent implements OnInit {
     const index = this.selectedOptions.indexOf(option);
     if (index === -1) {
       this.selectedOptions.push(option);
+      this.AppName.push(new FormControl(option));
     } else {
       this.selectedOptions.splice(index, 1);
+      const controlIndex = this.AppName.controls.findIndex((ctrl) => ctrl.value === option);
+      if (controlIndex !== -1) {
+        this.AppName.removeAt(controlIndex);
+      }
     }
   }
 
@@ -101,7 +101,6 @@ export class MonitoringGcpComponent implements OnInit {
   }
 
   fetchAppNames(selectedAccount: any, selectedCluster: any) {
-    console.log(selectedAccount)
     this.showProgressBar = true;
     this.createForm.value["account_name"] = selectedAccount;
     this.createForm.patchValue({ account_name: selectedAccount })
@@ -112,12 +111,9 @@ export class MonitoringGcpComponent implements OnInit {
       account_name: selectedAccount,
       cluster_name: selectedCluster
     }
-console.log(selectedCluster)
-    // Replace with your actual API call to fetch app names
     this.service.getGkeApps(body).subscribe(
       (data) => {
-        this.options = data.apps; 
-        console.log(this.options)
+        this.options = data.apps;
         this.showProgressBar = false;
       },
       (error) => {
@@ -130,7 +126,9 @@ console.log(selectedCluster)
   onAccountChange(selectedAccount: any) {
     this.showProgressBar = true;
     this.createForm.value["account_name"] = selectedAccount;
-    this.createForm.patchValue({ account_name: selectedAccount })
+    this.createForm.patchValue({ account_name: selectedAccount });
+    this.selectedOptions = [];
+    this.AppName.clear();
     const body = {
       username: this.username,
       account_name: selectedAccount
@@ -138,9 +136,7 @@ console.log(selectedCluster)
     this.service.getGkeClusters(body).subscribe(
       (res) => {
         this.showProgressBar = false;
-        console.log(res);
         this.selectCluster = res.clusters;
-        // this.fetchAppNames(selectedAccount);
       },
       (error) => {
         this.showProgressBar = false;
@@ -149,11 +145,6 @@ console.log(selectedCluster)
   }
 
   onNextEks() {
-    if (this.createForm.valid) {
-      const selectedApps = this.createForm.get('app_name')?.value;
-      console.log('Selected Apps:', selectedApps);
-      // Proceed with your form submission logic
-    }
     this.showProgressBar = true;
     this.showCredentialButton = false
     this.showCrentials = false
@@ -161,17 +152,32 @@ console.log(selectedCluster)
       (res) => {
         this.showProgressBar = false;
         this.showCredentialButton = true;
-        console.log(res);
         this.endpoint = res.endpoint
         this.toast.success('Monitoring Deployed Successfully')
         this.grafanaPassBody = this.createForm.value;
+        this.resetForm();
       },
       (error) => {
         this.showProgressBar = false;
         this.showCredentialButton = false;
       }
     )
+  }
 
+  resetForm() {
+    this.createForm.reset({
+      username: this.username,
+      account_name: '',
+      cluster_name: '',
+      project_name: '',
+      gcp_project_key: '',
+      app_name: []
+    });
+
+    this.selectedOptions = [];
+    this.AppName.clear();
+    this.showCredentialButton = false;
+    this.showCrentials = false;
   }
 
   onCancel() {
