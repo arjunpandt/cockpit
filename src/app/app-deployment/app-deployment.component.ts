@@ -42,7 +42,7 @@ export class AppDeploymentComponent implements OnInit {
       },
         (error) => {
           this.showProgressBar = false;
-          this.toast.error(error.error.error)
+          this.toast.error(error.error.endpoint)
         })
 
     } else {
@@ -62,7 +62,7 @@ export class AppDeploymentComponent implements OnInit {
       },
         (error) => {
           this.showProgressBar = false;
-          this.toast.error(error.error.error)
+          this.toast.error(error.error.endpoint)
         })
     }
   }

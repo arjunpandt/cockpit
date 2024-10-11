@@ -66,12 +66,15 @@ export class RegisterService {
   private appManagement = `${environment.api.baseUrlAppDeployment}${environment.api.routes.appManagement.endpoint}`
   private appGcpManagement = `${environment.api.baseUrlGcpDeployment}${environment.api.routes.appManagement.endpoint}`
   private monitoringManagement = `${environment.api.baseUrlAppDeployment}${environment.api.routes.monitoringManagement.endpoint}`
+  private monitoringGcpManagement = `${environment.api.baseUrlGcpDeployment}${environment.api.routes.monitoringManagement.endpoint}`
    private deleteDeployment = `${environment.api.baseUrlAppDeployment}${environment.api.routes.deleteDeployment.endpoint}`
   private deleteGcpDeployment = `${environment.api.baseUrlGcpDeployment}${environment.api.routes.deleteDeployment.endpoint}`
    private deleteMonitoring = `${environment.api.baseUrlAppDeployment}${environment.api.routes.deleteMonitoring.endpoint}`
+  private deleteGcpMonitoring = `${environment.api.baseUrlGcpDeployment}${environment.api.routes.deleteMonitoring.endpoint}`
    private createMonitoring = `${environment.api.baseUrlAppDeployment}${environment.api.routes.createMonitoring.endpoint}`
   private createGcpMonitoring = `${environment.api.baseUrlGcpDeployment}${environment.api.routes.createMonitoring.endpoint}`
    private grafanaPassword = `${environment.api.baseUrlAppDeployment}${environment.api.routes.grafanaPassword.endpoint}`
+  private grafanaGcpPassword = `${environment.api.baseUrlGcpDeployment}${environment.api.routes.grafanaPassword.endpoint}`
 
 
   jobId: any;
@@ -314,6 +317,10 @@ export class RegisterService {
     return this.httpClient.post(this.monitoringManagement,body)
   }
 
+  monitoringGcpManagementList(body: any): Observable<any>{
+    return this.httpClient.post(this.monitoringGcpManagement,body)
+  }
+
   postDeleteDeployment(body: any): Observable<any>{
     return this.httpClient.post(this.deleteDeployment,body)
   }
@@ -326,6 +333,10 @@ export class RegisterService {
     return this.httpClient.post(this.deleteMonitoring,body)
   }
 
+  postDeleteGcpMonitoring(body: any): Observable<any>{
+    return this.httpClient.post(this.deleteGcpMonitoring,body)
+  }
+
   monitoring(body: any): Observable<any>{
     return this.httpClient.post(this.createMonitoring,body)
   }
@@ -336,5 +347,9 @@ export class RegisterService {
 
   grafanaPass(body: any): Observable<any>{
     return this.httpClient.post(this.grafanaPassword,body)
+  }
+
+  grafanaGcpPass(body: any): Observable<any>{
+    return this.httpClient.post(this.grafanaGcpPassword,body)
   }
 }

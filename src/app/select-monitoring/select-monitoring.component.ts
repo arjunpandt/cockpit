@@ -9,30 +9,33 @@ import { faBackward } from '@fortawesome/free-solid-svg-icons';
 })
 export class SelectMonitoringComponent implements OnInit {
   currentRoute!: string;
-  faBackward=faBackward;
+  faBackward = faBackward;
 
   constructor(private router: Router,
     private route: ActivatedRoute,
   ) { }
 
   ngOnInit(): void {
-    this.currentRoute= this.router.url;
+    this.currentRoute = this.router.url;
   }
 
-  applicationDeployment=()=>{
-    if(this.currentRoute==='/home/monitoring/aws-select'){
+  applicationDeployment = () => {
+    if (this.currentRoute === '/home/monitoring/aws-select') {
       this.router.navigate(['/home/monitoring/aws'])
     } else {
       this.router.navigate(["/home/monitoring/gcp"]);
     }
-  } 
-
-  applicationManagement =()=>{
-    this.router.navigate(["/home/monitoring/management"])
   }
 
-  onBack(){
+  applicationManagement = () => {
+    if (this.currentRoute === '/home/monitoring/aws-select') {
+      this.router.navigate(['/home/monitoring/management/aws'])
+    } else {
+      this.router.navigate(["/home/monitoring/management/gcp"]);
+    }
+  }
+
+  onBack() {
     this.router.navigate(["/home/monitoring/select-cloud"])
   }
-
 }

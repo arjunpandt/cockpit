@@ -175,7 +175,11 @@ const routes: Routes = [
             component:MonitoringGcpComponent
           },
           {
-            path:'management',
+            path:'management/aws',
+            component:MonitoringManagemnetComponent
+          },
+          {
+            path:'management/gcp',
             component:MonitoringManagemnetComponent
           }
         ]
