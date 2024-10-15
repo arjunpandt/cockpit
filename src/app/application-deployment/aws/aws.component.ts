@@ -162,7 +162,7 @@ export class AwsComponent implements OnInit {
           if(res.created==="true"){
             this.showProgressBar = false;
             this.toast.success(res.message)
-            this.router.navigate(["/home/app-deployment"]) 
+            this.router.navigate(["/home/app-deployment/aws"]) 
             clearInterval(checkStatus)
             // clearInterval(recentJobCheck)
           }
