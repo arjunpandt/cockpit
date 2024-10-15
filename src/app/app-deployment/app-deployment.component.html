@@ -3,7 +3,7 @@
         <h1>Application Deployment</h1>
     </header>
     <section class="input-content">
-        <h2>Step 3.  Deploy Project</h2>
+        <h2>Step 3. Deploy Project</h2>
         <form class="form" [formGroup]="createForm" (ngSubmit)="onSubmit()">
 
             <!-- <label for="username">Username</label>
@@ -37,9 +37,12 @@
         </form>
         <div class="btns">
             <button class="btn btn-cancel" (click)="onCancel()">Cancel</button>
-            <button class="btn btn-confirm" [disabled]="createForm.invalid" (click)="onSubmit()">Submit</button>
+            <button class="btn btn-confirm" [ngStyle]="{ 'background-color': isDeployed ? 'blue' : '' }"
+                [disabled]="createForm.invalid" (click)="isDeployed ? onView() : onSubmit()">
+                {{ isDeployed ? 'View' : 'Submit' }}</button>
         </div>
-        <div style="margin-top: 40px;" *ngIf="deployedURl!==''">Apllication Deployed Succesfully! Here is the URL <a [href]="'http://'+deployedURl" target="_blank" [innerHTML]="deployedURl"></a></div>
+        <div style="margin-top: 40px;" *ngIf="deployedURl!==''">Apllication Deployed Succesfully! Here is the URL <a
+                [href]="'http://'+deployedURl" target="_blank" [innerHTML]="deployedURl"></a></div>
 
 
 

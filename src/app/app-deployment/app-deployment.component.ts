@@ -14,6 +14,7 @@ export class AppDeploymentComponent implements OnInit {
   showProgressBar: boolean = false;
   deployedURl: string = '';
   currentRoute!: string;
+  isDeployed: boolean = false;
   createForm = new FormGroup({
     app_name: new FormControl('', [Validators.required]),
   });
@@ -37,7 +38,8 @@ export class AppDeploymentComponent implements OnInit {
 
       this.service.createDeployment(data).subscribe((res) => {
         this.showProgressBar = false;
-        this.deployedURl = res.endpoint
+        this.deployedURl = res.endpoint;
+        this.isDeployed = true;
         this.toast.success("Apllication Deployed Succesfully!, Here is the URL");
       },
         (error) => {
@@ -67,6 +69,10 @@ export class AppDeploymentComponent implements OnInit {
     }
   }
 
+  onView() {
+    this.router.navigate(["/home/app-management/aws"]);
+  }
+  
   onCancel() {
     this.preRoute.back();
   }
