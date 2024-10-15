@@ -4,8 +4,6 @@
     </header>
     <section class="input-content">
         <h2>Monitoring Details<span>EKS</span></h2>
-
-
         <form class="form" [formGroup]="createForm" (ngSubmit)="onNextEks()">
             <label for="accountname">Account Name</label>
             <div class="tooltip-container">
@@ -14,7 +12,6 @@
                     <option value="" disabled selected>Select Account Name</option>
                     <option *ngFor="let acc of accountNames" [value]="acc">{{ acc }}</option>
                 </select>
-
                 <!-- <mat-icon matTooltip="You need to create an account first" class="info-icon">info</mat-icon> -->
             </div>
             <div>
@@ -49,17 +46,19 @@
         </form>
         <div class="btns">
             <button class="btn btn-cancel" (click)="onCancel()">Cancel</button>
-            <button class="btn btn-danger" [disabled]="(createForm.invalid)" (click)="onNextEks()">Submit</button>
+            <button class="btn btn-danger" [ngStyle]="{ 'background-color': isDeployed ? 'blue' : '' }"
+                [disabled]="(createForm.invalid)" (click)="isDeployed ? onView() : onNextEks()">
+                {{ isDeployed ? 'View' : 'Submit' }}</button>
         </div>
         <div *ngIf="showCredentialButton">
-            <div style="margin-top: 40px; display:inline-block; margin-right: 10px; font-weight: 700; font-size: large;">Monitoring Deployed Successfully!</div>
+            <div
+                style="margin-top: 40px; display:inline-block; margin-right: 10px; font-weight: 700; font-size: large;">
+                Monitoring Deployed Successfully!</div>
             <button class="btn btn-primary" (click)="getCredentials()">Check Credentials</button>
-            
         </div>
         <div *ngIf="showCrentials" style="margin-top: 10px; ">
-           <p><b>Endpoint</b>: <a [href]="'http://'+endpoint" target="_blank" [innerHTML]="endpoint"></a></p>
-           <p> <b>Password</b>: {{garafanaPass}}</p>
+            <p><b>Endpoint</b>: <a [href]="'http://'+endpoint" target="_blank" [innerHTML]="endpoint"></a></p>
+            <p> <b>Password</b>: {{garafanaPass}}</p>
         </div>
-        
     </section>
 </div>

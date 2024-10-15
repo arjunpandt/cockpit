@@ -59,7 +59,8 @@ export class AppDeploymentComponent implements OnInit {
 
       this.service.createGcpDeployment(data).subscribe((res) => {
         this.showProgressBar = false;
-        this.deployedURl = res.endpoint
+        this.deployedURl = res.endpoint;
+        this.isDeployed = true;
         this.toast.success("Apllication Deployed Succesfully!, Here is the URL");
       },
         (error) => {
@@ -70,9 +71,13 @@ export class AppDeploymentComponent implements OnInit {
   }
 
   onView() {
-    this.router.navigate(["/home/app-management/aws"]);
+    if (this.currentRoute === '/home/app-deployment/deploy/aws') {
+      this.router.navigate(["/home/app-management/aws"]);
+    } else {
+      this.router.navigate(["/home/app-management/gcp"]);
+    }
   }
-  
+
   onCancel() {
     this.preRoute.back();
   }

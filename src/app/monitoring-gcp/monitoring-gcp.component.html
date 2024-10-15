@@ -12,7 +12,6 @@
                     <option value="" disabled selected>Select Account Name</option>
                     <option *ngFor="let acc of accountNames" [value]="acc">{{ acc }}</option>
                 </select>
-
                 <!-- <mat-icon matTooltip="You need to create an account first" class="info-icon">info</mat-icon> -->
             </div>
             <div>
@@ -25,7 +24,6 @@
                     </select>
                 </div>
             </div>
-
             <label for="name">Project Id</label>
             <input class="form__inset" type="text" formControlName="gcp_project_key" placeholder="Project Id"
                 name="gcp project key">
@@ -33,7 +31,6 @@
                 *ngIf=" ProjectId.errors?.['required'] && (ProjectId.touched || ProjectId.dirty)">
                 Please enter Project id
             </div>
-
             <label for="name">Project Name</label>
             <input class="form__inset" type="text" formControlName="project_name" placeholder="Project Name"
                 name="Project Name">
@@ -55,8 +52,6 @@
                     </div>
                 </div>
             </div>
-
-
             <div *ngIf="showProgressBar" class="loading-overlay">
                 <div class="loader"></div>
                 <p class="loading-text">Just a moment...</p>
@@ -64,7 +59,9 @@
         </form>
         <div class="btns">
             <button class="btn btn-cancel" (click)="onCancel()">Cancel</button>
-            <button class="btn btn-danger" [disabled]="(createForm.invalid)" (click)="onNextEks()">Submit</button>
+            <button class="btn btn-danger" [ngStyle]="{ 'background-color': isDeployed ? 'blue' : '' }"
+                [disabled]="(createForm.invalid)" (click)="isDeployed ? onView() : onNextEks()">
+                {{ isDeployed ? 'View' : 'Submit' }}</button>
         </div>
         <div *ngIf="showCredentialButton">
             <div

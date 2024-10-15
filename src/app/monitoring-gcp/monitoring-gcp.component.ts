@@ -38,7 +38,7 @@ export class MonitoringGcpComponent implements OnInit {
   showCredentialButton = false;
   showCrentials = false;
   options: any[] = [];
-
+  isDeployed: boolean = false;
   selectedOptions: any[] = [];
   isDropdownOpen = false;
 
@@ -152,32 +152,21 @@ export class MonitoringGcpComponent implements OnInit {
       (res) => {
         this.showProgressBar = false;
         this.showCredentialButton = true;
-        this.endpoint = res.endpoint
+        this.endpoint = res.endpoint;
+        this.isDeployed = true;
         this.toast.success('Monitoring Deployed Successfully')
         this.grafanaPassBody = this.createForm.value;
-        this.resetForm();
       },
       (error) => {
         this.showProgressBar = false;
         this.showCredentialButton = false;
+        this.toast.error(error.error.endpoint)
       }
     )
   }
 
-  resetForm() {
-    this.createForm.reset({
-      username: this.username,
-      account_name: '',
-      cluster_name: '',
-      project_name: '',
-      gcp_project_key: '',
-      app_name: []
-    });
-
-    this.selectedOptions = [];
-    this.AppName.clear();
-    this.showCredentialButton = false;
-    this.showCrentials = false;
+  onView() {
+    this.router.navigate(["/home/monitoring/management/gcp"]);
   }
 
   onCancel() {
@@ -185,7 +174,7 @@ export class MonitoringGcpComponent implements OnInit {
   }
 
   getCredentials() {
-    this.router.navigate(["/home/monitoring/management"]);
+    this.router.navigate(["/home/monitoring/management/gcp"]);
     // this.showProgressBar = true;
     // this.service.grafanaPass(this.grafanaPassBody).subscribe(
     //   (res)=>{

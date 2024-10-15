@@ -10,54 +10,50 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./monitoring-aws.component.scss']
 })
 export class MonitoringAwsComponent implements OnInit {
+  clusterForm: boolean = false;
+  selectedCluster: string = '';
+  selectedAccount: string = '';
 
-  clusterForm:boolean= false;
-  selectedCluster:string='';
-  selectedAccount:string='';
-
-  createForm= new FormGroup({
-    cluster_name: new FormControl('',[Validators.required]),
-    account_name: new FormControl('',[Validators.required]),
-    project_name: new FormControl('',[Validators.required]),
-    app_name: new FormControl('',[Validators.required]),
+  createForm = new FormGroup({
+    cluster_name: new FormControl('', [Validators.required]),
+    account_name: new FormControl('', [Validators.required]),
+    project_name: new FormControl('', [Validators.required]),
+    app_name: new FormControl('', [Validators.required]),
     username: new FormControl('', [Validators.required])
   });
 
   showProgressBar: boolean = false;
-  username: string='';
-  awsBody={}
-  apiData: any[]=[];
-  postUsername= {};
+  username: string = '';
+  awsBody = {}
+  apiData: any[] = [];
+  postUsername = {};
   selectedAccountData: any;
   accountNames: string[] = [];
   accountName: string = '';
-  selectCluster:string[]=[]
-  endpoint:string='';
-  garafanaPass:string='';
-  grafanaPassBody={}
-  showCredentialButton=false;
-  showCrentials= false;
-
-
+  selectCluster: string[] = []
+  endpoint: string = '';
+  garafanaPass: string = '';
+  grafanaPassBody = {}
+  showCredentialButton = false;
+  showCrentials = false;
+  isDeployed: boolean = false;
 
   constructor(private router: Router,
     private service: RegisterService,
     private toast: ToastrService) { }
 
   ngOnInit(): void {
-
     this.username = localStorage.getItem("username") ?? '';
-
     this.fetchAccounts();
-    this.createForm.patchValue({'username': this.username})
-    this.awsBody={
+    this.createForm.patchValue({ 'username': this.username })
+    this.awsBody = {
       username: this.username
     }
   }
 
 
   fetchAccounts() {
-    this.showProgressBar=true;
+    this.showProgressBar = true;
     this.postUsername = {
       username: this.username
     };
@@ -65,75 +61,72 @@ export class MonitoringAwsComponent implements OnInit {
     this.service.getAwsCrediantial(this.postUsername).subscribe(
       (data) => {
         this.accountNames = data.map((item: any) => item);
-    this.showProgressBar=false;
+        this.showProgressBar = false;
       },
       (error) => {
         this.toast.error(error.error.message)
-    this.showProgressBar=false;
+        this.showProgressBar = false;
       }
     );
   }
 
-  onAccountChange(selectedAccount:any){
-    this.showProgressBar=true;
-    console.log(selectedAccount);
-    this.createForm.value["account_name"]=selectedAccount;
-    this.createForm.patchValue({account_name:selectedAccount})
-    const body ={
+  onAccountChange(selectedAccount: any) {
+    this.showProgressBar = true;
+    this.createForm.value["account_name"] = selectedAccount;
+    this.createForm.patchValue({ account_name: selectedAccount })
+    const body = {
       username: this.username,
-      account_name:selectedAccount
+      account_name: selectedAccount
     }
     this.service.getEksClusters(body).subscribe(
-      (res)=>{
-        this.showProgressBar=false;
-        console.log(res);
+      (res) => {
+        this.showProgressBar = false;
         this.selectCluster = res.clusters
-        
+
       },
-      (error)=>{
-        this.showProgressBar=false;
-        console.log(error);
-        
+      (error) => {
+        this.showProgressBar = false;
       }
     )
   }
 
-  onNextEks(){
-    this.showProgressBar=true;
-    this.showCredentialButton= false
-    this.showCrentials= false
-    console.log(this.createForm.value);
+  onNextEks() {
+    this.showProgressBar = true;
+    this.showCredentialButton = false
+    this.showCrentials = false
     this.service.monitoring(this.createForm.value).subscribe(
-      (res)=>{
-        this.showProgressBar=false;
-        this.showCredentialButton= true;
-        console.log(res);
-        this.endpoint = res.endpoint
+      (res) => {
+        this.showProgressBar = false;
+        this.showCredentialButton = true;
+        this.endpoint = res.endpoint;
+        this.isDeployed = true;
         this.toast.success('Monitoring Deployed Successfully')
         this.grafanaPassBody = this.createForm.value;
-        
       },
-      (error)=>{
-        this.showProgressBar=false;
-        this.showCredentialButton= false
-        console.log(error);
-        
+      (error) => {
+        this.showProgressBar = false;
+        this.showCredentialButton = false
+        this.toast.error(error.error.error)
       }
     )
-    
+
   }
 
-  onCancel(){
+  onView() {
+    this.router.navigate(["/home/monitoring/management/aws"]);
+  }
+
+  onCancel() {
     this.router.navigate(["/home/monitoring/select-cloud"]);
   }
 
-  getCredentials(){
-    this.router.navigate(["/home/monitoring/management"]);
+  getCredentials() {
+    this.router.navigate(["/home/monitoring/management/aws"]);
     // this.showProgressBar = true;
     // this.service.grafanaPass(this.grafanaPassBody).subscribe(
     //   (res)=>{
     //     console.log(res);
-        
+
     //     this.garafanaPass= res.password
     //     this.showProgressBar= false
     //     this.toast.success('Successfully Fetched Your Credentials!')
@@ -148,16 +141,16 @@ export class MonitoringAwsComponent implements OnInit {
     // )
   }
 
-  
-  get ProjectName():FormControl{
+
+  get ProjectName(): FormControl {
     return this.createForm.get("project_name") as FormControl;
   }
 
-  get AppName():FormControl{
+  get AppName(): FormControl {
     return this.createForm.get("app_name") as FormControl;
   }
 
-  get AccountName():FormControl{
+  get AccountName(): FormControl {
     return this.createForm.get("account_name") as FormControl;
   }
 }
