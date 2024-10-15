@@ -2,24 +2,30 @@
     <div class="container hero cards">
         <div class=" row device">
             <!-- <div> <h1>Select Cloud </h1></div> -->
-         </div>
+        </div>
         <div class="cloud-card">
+            <div style="display: flex; justify-content: flex-start; margin-left: -7rem; margin-top: 0.5rem;">
+                <button class="btn" (click)="onBack()"><fa-icon title="Previous Step"
+                        style="width: 4rem; color: white; font-size: 2rem;" [icon]="faBackward"
+                        class="transparent-button"></fa-icon>
+                </button>
+            </div>
             <div class="card device">
-                <div class="box" style="background-image: url(../../assets/deployment.png);" (click)="applicationDeployment()">
+                <div class="box" style="background-image: url(../../assets/deployment.png);"
+                    (click)="applicationDeployment()">
                 </div>
                 <div class="card-label">
                     <h3 style="color: black; text-align: center; font-weight: 900;">Application Deployment</h3>
                 </div>
             </div>
-
             <div class="card device">
-                <div class="box" style="background-image: url(../../assets/images/appDeployment.svg);" (click)="applicationManagement()">
+                <div class="box" style="background-image: url(../../assets/images/appDeployment.svg);"
+                    (click)="applicationManagement()">
                 </div>
                 <div class="card-label">
                     <h3 style="color: black; text-align: center; font-weight: 900;">Application Management</h3>
                 </div>
             </div>
         </div>
-        <div  style="display: flex; justify-content: flex-start; margin-left: 16.5rem; margin-top: 2rem;"><button class="btn" (click)="onBack()"><fa-icon title="Previous Step" style="width: 4rem; color: white; font-size: 2rem;" [icon]="faBackward"></fa-icon></button></div>
     </div>
 </div>

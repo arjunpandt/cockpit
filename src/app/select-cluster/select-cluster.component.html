@@ -7,34 +7,38 @@
         <div class=" row device">
             <div>
                 <h1 *ngIf=" currentRoute==='/home/monitoring/select-cloud'">Select Cloud For Monitoring</h1>
-                <h1 *ngIf=" currentRoute==='/home/app-deployment/select-cloud'">Select Cloud For Application Deployment</h1>
-         </div>
-        <div class="cloud-card">
-            <div class="card device">
-                <div class="box" style="background-image: url(../../assets/aws.png);" (click)="onClickAws()">
+                <h1 *ngIf=" currentRoute==='/home/app-deployment/select-cloud'">Select Cloud For Application Deployment
+                </h1>
+            </div>
+            <div class="cloud-card">
+                <div *ngIf="currentRoute==='/home/app-deployment/select-cloud' || currentRoute==='/home/monitoring/select-cloud'"
+                    style="display: flex; justify-content: flex-start; margin-left: -7.5rem; margin-top: 0.5rem; ">
+                    <button class="btn" (click)="onClickBack()">
+                        <fa-icon title="Previous Step" style="width: 4rem; color: white; font-size: 2rem;"
+                            [icon]="faArrowLeft" class="transparent-button"></fa-icon>
+                    </button>
                 </div>
-                <div class="card-label"> 
-                    <h3 style="color: black; text-align: center;">AWS</h3>
+                <div class="card device">
+                    <div class="box" style="background-image: url(../../assets/aws.png);" (click)="onClickAws()">
+                    </div>
+                    <div class="card-label">
+                        <h3 style="color: black; text-align: center;">AWS</h3>
+                    </div>
+                </div>
+                <div class="card device">
+                    <div class="box" style="background-image: url(./../assets/Azure.png);" (click)="onClickAzure()">
+                    </div>
+                    <div class="card-label">
+                        <h3 style="color: black; text-align: center;">Azure</h3>
+                    </div>
+                </div>
+                <div class="card device">
+                    <div class="box" style="background-image: url(./../assets/gcp.jpg);" (click)="onClickGcp()">
+                    </div>
+                    <div class="card-label">
+                        <h3 style="color: black; text-align: center;">GCP</h3>
+                    </div>
                 </div>
             </div>
-
-            <div class="card device">
-                <div class="box" style="background-image: url(./../assets/Azure.png);" (click)="onClickAzure()">
-                </div>
-                <div class="card-label">
-                    <h3 style="color: black; text-align: center;">Azure</h3>
-                </div>
-            </div>
-
-            <div class="card device">
-                <div class="box" style="background-image: url(./../assets/gcp.jpg);" (click)="onClickGcp()">
-                </div>
-                <div class="card-label">
-                    <h3 style="color: black; text-align: center;">GCP</h3>
-                </div>
-            </div>
-            
         </div>
-        <div *ngIf="currentRoute==='/home/app-deployment/select-cloud' || currentRoute==='/home/monitoring/select-cloud'" style="display: flex; justify-content: flex-start; margin-left: 7.5rem; margin-top: 2rem; "><button class="btn" (click)="onClickBack()"><fa-icon title="Previous Step" style="width: 4rem; color: white; font-size: 2rem;" [icon]="faArrowLeft"></fa-icon></button></div>
     </div>
-</div>
