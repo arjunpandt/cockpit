@@ -5,9 +5,9 @@
 export const environment = {
   production: true,
   api:{
-    baseUrl:"https://cockpit.shahenvaz.tech/",
-    baseUrlAppDeployment:"https://apps.shahenvaz.tech/",
-    baseUrlGcpDeployment:"https://gcpbackend.shahenvaz.tech/",
+    baseUrl:"https://devcockpit.shahenvaz.tech/",
+    baseUrlAppDeployment:"https://devapps.shahenvaz.tech/",
+    baseUrlGcpDeployment:"https://devgcpbackend.shahenvaz.tech/",
     routes:{
       registerUser:{endpoint:'jsonRegister', method:'POST'},
       loginUser: {endpoint:'JsonLogin', method:'POST'},

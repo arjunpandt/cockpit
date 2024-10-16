@@ -1,6 +1,6 @@
 on:
   push:
-    branches: ['gcpChanges']
+    branches: ['gcpChanges','develop']
     paths: ['src/**']
 
 jobs:
